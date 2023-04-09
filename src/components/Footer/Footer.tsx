@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
+import { Wrapper } from './styles';
 
 const Footer: FunctionComponent = () => {
     return (
-        <section>
+        <Wrapper>
             <div>Footer</div>
-        </section>
+        </Wrapper>
     );
 };
 

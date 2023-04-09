@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 
-const Store: React.FC = (): JSX.Element => {
+const About: React.FC = (): JSX.Element => {
     return (
         <section>
             <div>
-                <h1>Store</h1>
+                <h1>About</h1>
             </div>
         </section>
     );
 };
 
-export { Store };
+export { About };
