@@ -6,6 +6,7 @@ import {
     Text,
     MenuWrapper,
     MenuBoxes,
+    Tshirt,
 } from './styles';
 
 const Home: React.FC = (): JSX.Element => {
@@ -15,6 +16,7 @@ const Home: React.FC = (): JSX.Element => {
                 <h1>Home</h1>
             </Text>
             <HomeProduct>
+                <Tshirt />
                 <ImageProduct />
             </HomeProduct>
             <MenuWrapper>

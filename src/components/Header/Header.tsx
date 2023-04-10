@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { Wrapper, Links } from './styles';
+import { Wrapper, Links, Button } from './styles';
 import { Link } from 'react-router-dom';
+import { FiShoppingCart } from 'react-icons/fi';
 
-type THeader = { viewCart: boolean };
+type THeader = { viewCart: boolean; primary?: boolean };
 
 const Header: FunctionComponent<THeader> = () => {
     return (
@@ -20,6 +21,9 @@ const Header: FunctionComponent<THeader> = () => {
                 <Link to={'Login'}>
                     <h1>Login</h1>
                 </Link>
+                <Button primary>
+                    <FiShoppingCart />
+                </Button>
             </Links>
         </Wrapper>
     );

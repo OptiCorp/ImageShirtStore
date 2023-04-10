@@ -19,3 +19,21 @@ export const Links = styled.h1`
     justify-content: space-between;
     font-size: 0.8rem;
 `;
+
+export const Button = styled.button<{ primary?: boolean }>`
+    background: ${(props) => (props.primary ? 'red' : 'white')};
+    color: ${(props) => (props.primary ? 'white' : 'red')};
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid palevioletred;
+    border-radius: 3px;
+`;
+
+export const Container = styled.div`
+    width: 100%;
+
+    margin: 0;
+`;
+
+export const List = styled.div``;

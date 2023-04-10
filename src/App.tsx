@@ -19,8 +19,10 @@ function App(): JSX.Element {
 
     return (
         <div className='App'>
-            <Container>
+            <section className='gridheader'>
                 <Header viewCart={viewCart} />
+            </section>
+            <section className='gridpages'>
                 <Routes>
                     <Route path='/' element={<Home />} />
 
@@ -29,8 +31,10 @@ function App(): JSX.Element {
                     <Route path='Login' element={<Login />} />
                     <Route path='*' element={<Navigate to='/' replace />} />
                 </Routes>
+            </section>
+            <section className='gridfot'>
                 <Footer />
-            </Container>
+            </section>
         </div>
     );
 }
