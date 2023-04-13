@@ -8,14 +8,11 @@
 .App {
 
 
-
-
-  min-height: 100vh;
+  margin: 0;
   display: grid;
-  grid-template-rows: auto 1fr 1fr;
-  gap: 3rem;
 
-
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
 
 
 
@@ -31,7 +28,9 @@ h1 {
 
 
 .gridfot {
-  grid-row: 8/8;
+  grid-row: 3/3;
+  height: 0;
+  width: 100%;
 }
 
 .gridheader {
@@ -40,4 +39,8 @@ h1 {
 
 .gridpages {
   grid-row: 2/2;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }

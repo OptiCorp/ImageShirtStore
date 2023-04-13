@@ -1,12 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { Wrapper } from './styles';
+import { WrapperFooter } from './styles';
 
 const Footer: FunctionComponent = () => {
-    return (
-        <Wrapper>
-            <div>Footer</div>
-        </Wrapper>
-    );
+	return <WrapperFooter>Footer</WrapperFooter>;
 };
 
 export { Footer };

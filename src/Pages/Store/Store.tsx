@@ -1,23 +1,23 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import items from './items.json';
-import { Box, SideBox, Wrapper, Productbox, Title } from './styles';
-import { Col, Row } from 'react-bootstrap';
-import { StoreItem } from '../../components/StoreItem';
 
-const Store: React.FC = (): JSX.Element => {
-    return (
-        <Wrapper>
-            <SideBox />
+import { Box, Wrapper, Productbox } from './styles';
+import { NekoImages, JsonNekoImage } from '../../Products/ImageList';
+import SideBox from '../ProductDetail/SideBox';
 
-            <Box>
-                {items.map((item) => (
-                    <Productbox key={item.id}>
-                        <StoreItem {...item} />
-                    </Productbox>
-                ))}
-            </Box>
-        </Wrapper>
-    );
+const Store = () => {
+	const [neko, setNeko] = useState<JsonNekoImage | null>(null);
+
+	return (
+		<Wrapper>
+			<SideBox item={neko} />
+
+			<Box>
+				<Productbox>
+					<NekoImages onNekoClick={neko => setNeko(neko)} />
+				</Productbox>
+			</Box>
+		</Wrapper>
+	);
 };
 
 export { Store };
