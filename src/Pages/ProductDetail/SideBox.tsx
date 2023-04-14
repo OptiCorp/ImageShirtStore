@@ -11,7 +11,7 @@ const SideBox: FunctionComponent<Props> = ({ item }) => {
 		<SideBoxContainer>
 			<SideBoxMain>
 				<ProductImage>
-					<img src={item?.url} height={200} width={150} />
+					<img src={item?.url} height={300} width={190} />
 				</ProductImage>
 			</SideBoxMain>
 			<List>

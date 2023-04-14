@@ -19,9 +19,27 @@ body,
 }
 
 .nekoimg {
-  margin: 1% 3% 0;
+  margin: 1% 0;
+
   min-width: 200px;
   max-width: 200px;
-  max-height: 200px;
 
+  max-height: 200px;
+  min-height: 100px;
+}
+
+.nekoselected {
+  border: dashed blue;
+  filter: drop-shadow(5px 5px 10px #1b1b1b);
+
+}
+
+.nekoimg:active {
+
+  scale: 110%;
+
+}
+
+.nekoimg:hover {
+  filter: brightness(80%);
 }

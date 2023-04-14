@@ -1,13 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface JsonNekoImage {
+	url: string;
+	thumbnail: string;
+}
+
+export interface NekoCategory {
+	type: string;
+	min: number;
+	max: number;
+}
+
+const PAGE_SIZE = 20;
+
 export const nekoSlice = createSlice({
 	name: 'nekoImages',
 	initialState: {
-		images: [],
+		images: [] as JsonNekoImage[],
 		isLoading: false,
 		error: null,
-		// pageIndex
-		// nekoCategory
+		pageIndex: 0,
+		pageCount: 0,
+		nekoCategory: null as NekoCategory | null,
 	},
 	reducers: {
 		// getNekoCategoryStart
@@ -17,55 +31,65 @@ export const nekoSlice = createSlice({
 		// Where action is a page
 		// setNekoPage(state, action)
 
-		getNekoImagesStart(state) {
+		getNekoCategoryStart(state) {
 			state.isLoading = true;
 		},
-		getNekoImagesSuccess(state, action) {
-			state.images = action.payload;
+		getNekoCategorySuccess(state, action) {
+			state.nekoCategory = action.payload;
+			state.pageIndex = 0;
+			state.pageCount = state.nekoCategory
+				? Math.ceil(state.nekoCategory.max / PAGE_SIZE)
+				: 1;
+			state.images = getPageImages(0, state.nekoCategory);
 			state.isLoading = false;
 			state.error = null;
 		},
-		getNekoImagesFailure(state, action) {
+		getNekoCategoryFailure(state, action) {
 			state.isLoading = false;
 			state.error = action.payload;
+		},
+		setNekoPage(state, action: { payload: number }) {
+			if (state.nekoCategory) {
+				state.pageIndex = action.payload;
+				state.images = getPageImages(action.payload, state.nekoCategory);
+			} else {
+				state.images = [];
+			}
 		},
 	},
 });
 
-// // export const imageSlice = createSlice({
-// 	name: 'image',
-// 	initialState,
-// 	reducers: {
-// 		fetchImageStart(state) {
-// 			state.loading = true;
-// 			state.error = false;
-// 		},
-// 		fetchImageSuccess(state, action: PayloadAction<string>) {
-// 			state.loading = false;
-// 			state.error = false;
-// 			state.data = action.payload;
-// 		},
-// 		fetchImageFailure(state) {
-// 			state.loading = false;
-// 			state.error = true;
-// 		},
-// 	},
-// });
+// page numbers, id=min(1) if its more then it breaks on the max(913),
+function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
+	const result: JsonNekoImage[] = [];
 
-// export const { fetchImageStart, fetchImageSuccess, fetchImageFailure } = imageSlice.actions;
+	if (nekoCategory) {
+		for (let i = 0; i < PAGE_SIZE; i++) {
+			const id = nekoCategory.min + pageIndex * PAGE_SIZE + i;
 
-// export const fetchImage =
-// 	(url: string): AppThunk =>
-// 	async dispatch => {
-// 		dispatch(fetchImageStart());
-// 		try {
-// 			const response = await fetch('https://nekos.best/api/v2/neko?amount=20');
-// 			const data = await response.blob();
-// 			const imageUrl = URL.createObjectURL(data);
-// 			dispatch(fetchImageSuccess(imageUrl));
-// 		} catch (error) {
-// 			dispatch(fetchImageFailure());
-// 		}
-// 	};
+			if (id > nekoCategory.max) {
+				break;
+			}
 
-// export default imageSlice.reducer;
+			// If "1", this becomes "0001". If "21", this becomes "0021", and so on. to make/save the ID from the earlier fetch
+			// so the store will have the same images in sequence.
+			// since the API only returns random img,
+			const imageId = id.toString().padStart(4, '0');
+
+			const url = `https://nekos.best/api/v2/neko/${imageId}.png`;
+
+			//refers to the link to a thumbnail of the images
+			const thumbnailUrl =
+				id >= 1 && id <= 913
+					? `https://littlealexh0rn.github.io/nekos-thumbnails/nekos_thumbnails/${imageId}-thumbnail.png`
+					: url;
+
+			//
+			result.push({
+				url: url,
+				thumbnail: thumbnailUrl,
+			});
+		}
+	}
+	return result;
+}

@@ -2,66 +2,37 @@ import React, { useState } from 'react';
 import { Dispatch } from 'redux';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { nekoSlice } from './imageSlice';
+import { nekoSlice, JsonNekoImage, NekoCategory } from './imageSlice';
 import '../styles/index.css';
 
-export interface JsonNekoImage {
-	url: string;
-}
-
 export interface NekoProps {
-	onNekoClick: (clickedNeko: JsonNekoImage) => void;
+	onSelectedNeko: (clickedNeko: JsonNekoImage) => void;
 }
-
-interface NekoCategory {
-	type: string;
-	min: number;
-	max: number;
-}
-
-const PAGE_SIZE = 20;
 
 export const NekoImages = (props: NekoProps) => {
-	//const dispatch = useDispatch();
-	//const { images, isLoading, error } = useSelector(state => state.nekoImages);
+	const dispatch = useDispatch();
 
-	const [isLoading, setLoading] = useState(false);
-	const [error, setError] = useState<Error | null>(null);
+	const [selectedNeko, setSelectedNeko] = useState<JsonNekoImage | null>(null);
 
-	const [pageIndex, setPageIndex] = useState(0);
-	const [nekoCategory, setNekoCategory] = useState<NekoCategory | null>(null);
+	const { images, isLoading, error, pageIndex, pageCount, nekoCategory } = useSelector(
+		state => state.nekoImages
+	);
 
-	const [images, setImages] = useState<JsonNekoImage[]>([]);
+	// event handler with the image that goes to the t shirt
+	const { onSelectedNeko } = props;
 
-	const { onNekoClick } = props;
-
+	// loading initial category
 	useEffect(() => {
-		loadNekoCategory('neko', setNekoCategory, setLoading, setError);
+		loadNekoCategory('neko', dispatch);
 	}, []);
 
+	// sets the first image to the 1 image if nothing is selected
 	useEffect(() => {
-		//dispatch(nekoSlice.actions.getNekoImagesStart());
-		//fetch('https://nekos.best/api/v2/neko?amount=20')
-		//	.then(res => res.json())
-		//	.then(data => dispatch(nekoSlice.actions.getNekoImagesSuccess(data.results)))
-		//	.catch(error => dispatch(nekoSlice.actions.getNekoImagesFailure(error)));
-
-		const result: JsonNekoImage[] = [];
-
-		if (nekoCategory) {
-			for (let i = 0; i < PAGE_SIZE; i++) {
-				const id = nekoCategory.min + pageIndex * PAGE_SIZE + i;
-
-				if (id > nekoCategory.max) {
-					break;
-				}
-				result.push({
-					url: `https://nekos.best/api/v2/neko/${('' + id).padStart(4, '0')}.png`,
-				});
-			}
+		if (!selectedNeko && images) {
+			setSelectedNeko(images[0]);
+			onSelectedNeko(images[0]);
 		}
-		setImages(result);
-	}, [pageIndex, nekoCategory]);
+	}, [selectedNeko, images]);
 
 	if (isLoading) {
 		return <p>Loading...</p>;
@@ -70,7 +41,6 @@ export const NekoImages = (props: NekoProps) => {
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
-	const pageCount = nekoCategory ? Math.ceil(nekoCategory.max / PAGE_SIZE) : 1;
 
 	return (
 		<div>
@@ -78,13 +48,16 @@ export const NekoImages = (props: NekoProps) => {
 				<span>
 					Page: {pageIndex + 1} / {pageCount}
 				</span>
-				<button disabled={pageIndex < 0} onClick={() => setPageIndex(pageIndex - 1)}>
+				<button
+					disabled={pageIndex <= 0}
+					onClick={() => dispatch(nekoSlice.actions.setNekoPage(pageIndex - 1))}
+				>
 					Prev
 				</button>
 				;
 				<button
 					disabled={pageIndex >= pageCount - 1}
-					onClick={() => setPageIndex(pageIndex + 1)}
+					onClick={() => dispatch(nekoSlice.actions.setNekoPage(pageIndex + 1))}
 				>
 					Next
 				</button>
@@ -93,11 +66,16 @@ export const NekoImages = (props: NekoProps) => {
 			<div>
 				{images.map((image: JsonNekoImage) => (
 					<img
-						className='nekoimg'
+						className={
+							'nekoimg' + (selectedNeko?.url === image.url ? ' nekoselected' : '')
+						}
 						key={image.url}
-						src={getImageThumbnail(image.url)}
+						src={image.thumbnail}
 						alt='Neko image'
-						onClick={() => onNekoClick(image)}
+						onClick={() => {
+							setSelectedNeko(image);
+							onSelectedNeko(image);
+						}}
 					/>
 				))}
 			</div>
@@ -105,21 +83,10 @@ export const NekoImages = (props: NekoProps) => {
 	);
 };
 
-async function loadNekoCategory(
-	type: string,
-	setNekoCategory: (x: NekoCategory) => void,
-	setLoading: (v: boolean) => void,
-	setError: (error: Error | null) => void
-) {
-	// https://nekos.best/api/v2/endpoints
-	// neko:
-	//format	"png"
-	//min	"0001"
-	//max	"0913"
-	//}
+// fetches the amount of images(categories), calls forth/distpatches actions/states from slice
 
-	setLoading(true);
-	setError(null);
+async function loadNekoCategory(type: string, dispatch: Dispatch) {
+	dispatch(nekoSlice.actions.getNekoCategoryStart());
 
 	try {
 		const response = await fetch('https://nekos.best/api/v2/endpoints');
@@ -127,35 +94,13 @@ async function loadNekoCategory(
 
 		const neko = data[type];
 
-		setNekoCategory({
+		const category: NekoCategory = {
 			type: type,
 			min: parseInt(neko['min']),
 			max: parseInt(neko['max']),
-		});
+		};
+		dispatch(nekoSlice.actions.getNekoCategorySuccess(category));
 	} catch (e) {
-		setError(e);
-	} finally {
-		setLoading(false);
+		dispatch(nekoSlice.actions.getNekoCategoryFailure(e));
 	}
-}
-
-function getImageThumbnail(url: string) {
-	// https://regex101.com/
-	// Example URL: https://nekos.best/api/v2/neko/0082.png
-	const regex = /https:\/\/nekos\.best\/api\/v2\/neko\/(\d{4})\.png/;
-	const match = url.match(regex);
-
-	if (match) {
-		const imageID = match[1];
-		const id = parseInt(imageID);
-
-		if (id >= 1 && id <= 913) {
-			return `https://littlealexh0rn.github.io/nekos-thumbnails/nekos_thumbnails/${imageID.padStart(
-				4,
-				'0'
-			)}-thumbnail.png`;
-		}
-	}
-	console.log('URL does not match the pattern');
-	return url;
 }

@@ -9,14 +9,11 @@ export const Box = styled.div`
 	min-width: 200px;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(40%, 700px));
+	grid-template-columns: min(200px) min(1fr);
 	grid-template-rows: auto;
 
 	grid-gap: 50px;
 
-	@media (max-width: 500px) {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
 	::-webkit-scrollbar {
 		display: none;
 	}
@@ -38,7 +35,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Productbox = styled.div`
-	margin: 3rem 0;
+	margin: 0 auto;
+
 	width: 100%;
 	cursor: pointer;
 	min-height: 150px;

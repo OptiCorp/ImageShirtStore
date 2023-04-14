@@ -1,19 +1,31 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import { Box, Wrapper, Productbox } from './styles';
-import { NekoImages, JsonNekoImage } from '../../Products/ImageList';
+import { NekoImages } from '../../Products/ImageList';
+import { JsonNekoImage } from '../../Products/imageSlice';
 import SideBox from '../ProductDetail/SideBox';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { storeSlice } from './storeSlice';
+
+//add to cart,
 
 const Store = () => {
-	const [neko, setNeko] = useState<JsonNekoImage | null>(null);
+	const dispatch = useDispatch();
+
+	// const [neko, setNeko] = useState<JsonNekoImage | null>(null);
+
+	const { selectedNeko } = useSelector(state => state.store);
 
 	return (
 		<Wrapper>
-			<SideBox item={neko} />
+			<SideBox item={selectedNeko} />
 
 			<Box>
 				<Productbox>
-					<NekoImages onNekoClick={neko => setNeko(neko)} />
+					<NekoImages
+						onSelectedNeko={neko => dispatch(storeSlice.actions.setSelectedNeko(neko))}
+					/>
 				</Productbox>
 			</Box>
 		</Wrapper>
