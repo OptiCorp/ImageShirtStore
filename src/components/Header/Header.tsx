@@ -6,27 +6,27 @@ import { FiShoppingCart } from 'react-icons/fi';
 type THeader = { viewCart: boolean; primary?: boolean };
 
 const Header: FunctionComponent<THeader> = () => {
-    return (
-        <Wrapper>
-            <Links>
-                <Link to={'/'}>
-                    <h1>Home</h1>
-                </Link>
-                <Link to={'Store'}>
-                    <h1>Store</h1>
-                </Link>
-                <Link to={'About'}>
-                    <h1>About</h1>
-                </Link>
-                <Link to={'Login'}>
-                    <h1>Login</h1>
-                </Link>
-                <Button primary>
-                    <FiShoppingCart />
-                </Button>
-            </Links>
-        </Wrapper>
-    );
+	return (
+		<Wrapper>
+			<Links>
+				<Link to={'/'}>
+					<h1>Home</h1>
+				</Link>
+				<Link to={'Shop'}>
+					<h1>Store</h1>
+				</Link>
+				<Link to={'About'}>
+					<h1>About</h1>
+				</Link>
+				<Link to={'Login'}>
+					<h1>Login</h1>
+				</Link>
+				<Button primary>
+					<FiShoppingCart />
+				</Button>
+			</Links>
+		</Wrapper>
+	);
 };
 
 export { Header };

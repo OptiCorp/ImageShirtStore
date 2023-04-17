@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Dispatch } from 'redux';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks/hooks';
 import { nekoSlice, JsonNekoImage, NekoCategory } from './imageSlice';
 import '../styles/index.css';
+import { IndexButton } from './styles';
 
 export interface NekoProps {
 	onSelectedNeko: (clickedNeko: JsonNekoImage) => void;
@@ -14,7 +16,7 @@ export const NekoImages = (props: NekoProps) => {
 
 	const [selectedNeko, setSelectedNeko] = useState<JsonNekoImage | null>(null);
 
-	const { images, isLoading, error, pageIndex, pageCount, nekoCategory } = useSelector(
+	const { images, isLoading, error, pageIndex, pageCount, nekoCategory } = useAppSelector(
 		state => state.nekoImages
 	);
 
@@ -48,19 +50,19 @@ export const NekoImages = (props: NekoProps) => {
 				<span>
 					Page: {pageIndex + 1} / {pageCount}
 				</span>
-				<button
+				<IndexButton
 					disabled={pageIndex <= 0}
 					onClick={() => dispatch(nekoSlice.actions.setNekoPage(pageIndex - 1))}
 				>
 					Prev
-				</button>
+				</IndexButton>
 				;
-				<button
+				<IndexButton
 					disabled={pageIndex >= pageCount - 1}
 					onClick={() => dispatch(nekoSlice.actions.setNekoPage(pageIndex + 1))}
 				>
 					Next
-				</button>
+				</IndexButton>
 				;
 			</div>
 			<div>
@@ -89,7 +91,7 @@ async function loadNekoCategory(type: string, dispatch: Dispatch) {
 	dispatch(nekoSlice.actions.getNekoCategoryStart());
 
 	try {
-		const response = await fetch('https://nekos.best/api/v2/endpoints');
+		const response = await fetch('https://comphenix.net/zeus/api/categories.json');
 		const data = await response.json();
 
 		const neko = data[type];

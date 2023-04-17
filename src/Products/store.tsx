@@ -1,15 +1,14 @@
-import { nekoSlice } from './imageSlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-
-import { storeSlice } from '../Pages/Store/storeSlice';
-
-import cartSlice from '../components/Cart/cartSlice';
+import { shopSlice } from '../Pages/Shop/shopSlice';
+import { nekoSlice } from './imageSlice';
+import { cartSlice } from '../components/Cart/cartSlice';
 
 export const store = configureStore({
 	reducer: {
 		nekoImages: nekoSlice.reducer,
-		store: storeSlice.reducer,
+		shop: shopSlice.reducer,
+		cart: cartSlice.reducer,
 	},
 });
 

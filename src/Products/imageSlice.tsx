@@ -73,15 +73,15 @@ function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
 
 			// If "1", this becomes "0001". If "21", this becomes "0021", and so on. to make/save the ID from the earlier fetch
 			// so the store will have the same images in sequence.
-			// since the API only returns random img,
+			// since the API only returns random img in random order,
 			const imageId = id.toString().padStart(4, '0');
 
-			const url = `https://nekos.best/api/v2/neko/${imageId}.png`;
+			const url = `https://comphenix.net/zeus/api/neko/${imageId}.png`;
 
 			//refers to the link to a thumbnail of the images
 			const thumbnailUrl =
 				id >= 1 && id <= 913
-					? `https://littlealexh0rn.github.io/nekos-thumbnails/nekos_thumbnails/${imageId}-thumbnail.png`
+					? `https://comphenix.net/zeus/api/neko_thumbnail/${imageId}-thumbnail.png`
 					: url;
 
 			//

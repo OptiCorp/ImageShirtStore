@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import '././styles/App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from './Pages/Home/Home';
-import { Store } from './Pages/Store/Store';
+import { Shop } from './Pages/Shop/Shop';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './Pages/Login/Login';
@@ -21,7 +21,7 @@ function App(): JSX.Element {
 				<Routes>
 					<Route path='/' element={<Home />} />
 
-					<Route path='Store' element={<Store />} />
+					<Route path='Shop' element={<Shop />} />
 
 					<Route path='About' element={<About />} />
 					<Route path='Login' element={<Login />} />

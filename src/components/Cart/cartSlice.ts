@@ -1,15 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { JsonNekoImage } from '../../Products/imageSlice';
 
 export interface CartState {
-	items: { [productID: string]: number };
+	items: JsonNekoImage[];
 }
 
-const initialState: CartState = { items: {} };
+const initialState: CartState = { items: [] };
 
-const cartSlice = createSlice({
+export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
-	reducers: {},
+	reducers: {
+		addToCart(state, action: PayloadAction<JsonNekoImage>) {
+			state.items.push(action.payload);
+		},
+	},
 });
 
 export default cartSlice.reducer;
+export const { addToCart } = cartSlice.actions;
