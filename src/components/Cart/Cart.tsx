@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Cart: React.FC = (): JSX.Element => {
-  return (
-    <section>
-      <div>
-        <h1>cart</h1>
-      </div>
-    </section>
-  );
+	return (
+		<section>
+			<div>
+				<h1>cart</h1>
+			</div>
+		</section>
+	);
 };
 
 export { Cart };
