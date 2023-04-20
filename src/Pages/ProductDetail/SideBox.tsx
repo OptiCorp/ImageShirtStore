@@ -14,16 +14,23 @@ import { addToCart } from '../../components/Cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useDispatch } from 'react-redux';
 import { shopSlice } from '../Shop/shopSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 interface Props {
-	item: JsonNekoImage[] | null;
-	selectedNeko: JsonNekoImage | null;
+	items: JsonNekoImage[];
+	selectedNeko: JsonNekoImage;
+	id: number;
 }
 
-const SideBox: FunctionComponent<Props> = ({ selectedNeko, item }) => {
+const SideBox: FunctionComponent<Props> = ({ selectedNeko, items, id }) => {
 	const dispatch = useDispatch();
+
+	console.log(selectedNeko);
 
 	const handleToCart = (item: JsonNekoImage) => {
 		dispatch(addToCart(item));
+		toast.success('t shirt added');
 	};
 	return (
 		<SideBoxContainer>
@@ -34,11 +41,19 @@ const SideBox: FunctionComponent<Props> = ({ selectedNeko, item }) => {
 			</SideBoxMain>
 			<List>
 				<ListItem2>
-					<IndexButton onClick={() => handleToCart}>add to cart</IndexButton>
+					<IndexButton onClick={() => handleToCart(selectedNeko)}>
+						add to cart
+					</IndexButton>
 				</ListItem2>
 				<ListItem2>$20</ListItem2>
 				<ListItem2>Size options</ListItem2>
 			</List>
+			<ToastContainer
+				position='top-left'
+				autoClose={7000}
+				progressClassName='toastProgress'
+				bodyClassName='toastBody'
+			/>
 		</SideBoxContainer>
 	);
 };

@@ -11,7 +11,7 @@ export const Box = styled.div`
 	min-width: 200px;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 	display: grid;
-	grid-template-columns: min(200px) min(1fr);
+	grid-template-columns: min(400px) min(1fr);
 	grid-template-rows: auto;
 	background-color: #ffffff93;
 	grid-gap: 50px;

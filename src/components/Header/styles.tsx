@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 
 export const Wrapper = styled.div`
 	padding: 10px;
-	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	margin: 0;
 	max-height: 10rem;
 	background-color: #4f85b5;
 `;
@@ -19,11 +24,12 @@ export const Links = styled.div`
 	font-size: 0.8rem;
 `;
 
-export const Button = styled.button<{ primary?: boolean }>`
-	background: ${({ primary }) => (primary ? 'red' : 'white')};
-	color: ${primary => (primary ? 'white' : 'red')};
+export const Button = styled.button`
+	color: black;
 	font-size: 1em;
-	margin: 1em;
+	margin: 0;
+	max-width: 50px;
+
 	padding: 0.25em 1em;
 	border: 2px solid palevioletred;
 	border-radius: 3px;
@@ -34,3 +40,58 @@ export const Container = styled.div`
 
 	margin: 0;
 `;
+
+export const CartButton = styled.button`
+	margin: 0;
+	width: 3rem;
+
+	position: relative;
+	background-color: #216bacc0;
+
+	display: inline-block;
+	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+	border: 0;
+	border-radius: 12px;
+	color: #000000;
+	cursor: pointer;
+	font-weight: 600;
+	outline: transparent;
+	transition: box-shadow 0.2s ease-in-out;
+	text-align: center;
+	text-decoration: none;
+	&:hover {
+		box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+			0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+	}
+	&:active {
+		box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+			0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+	}
+`;
+
+export const CheckOutButtonStyled = styled.button`
+	border: none;
+	margin: 3rem;
+	cursor: pointer;
+
+	font-weight: 600;
+	line-height: 20%;
+	outline: transparent;
+	padding: 2%;
+
+	transition: box-shadow 0.2s ease-in-out;
+	color: #2c3e50;
+	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+	transition: all 0.25s ease;
+	z-index: 1;
+
+	font-size: 1.5em;
+
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+		transform: translate(-4px, 4px);
+	}
+`;
+
+export const NumberItems = styled.p``;

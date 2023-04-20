@@ -45,3 +45,22 @@ body,
 .nekoimg:hover {
   filter: brightness(80%);
 }
+
+.Toastify__toast--success {
+  border: 10px solid #e138ff !important;
+  border-radius: 50px !important;
+  background: #dc7eb8 !important;
+  color: black;
+
+}
+
+.toastProgress {
+  background: #ffeaf8 !important;
+}
+
+.toastBody {
+  font-family: 'Atlas Grotesk Web';
+  color: #ffffff;
+  /* #10171D */
+  font-size: 1rem !important;
+}

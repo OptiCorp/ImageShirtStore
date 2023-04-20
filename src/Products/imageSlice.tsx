@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
+uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+
 export interface JsonNekoImage {
 	url: string;
 	thumbnail: string;
+	imageId: string;
+	quantity: number;
 }
 
 export interface NekoCategory {
@@ -14,9 +20,10 @@ export interface NekoCategory {
 const PAGE_SIZE = 20;
 
 export const nekoSlice = createSlice({
-	name: 'nekoImages',
+	name: 'nekoImageSlice',
 	initialState: {
 		images: [] as JsonNekoImage[],
+		imageId: 0,
 		isLoading: false,
 		error: null,
 		pageIndex: 0,
@@ -63,33 +70,33 @@ export const nekoSlice = createSlice({
 function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
 	const result: JsonNekoImage[] = [];
 
-	if (nekoCategory) {
-		for (let i = 0; i < PAGE_SIZE; i++) {
-			const id = nekoCategory.min + pageIndex * PAGE_SIZE + i;
+	if (!nekoCategory) return result;
+	for (let i = 0; i < PAGE_SIZE; i++) {
+		const id = nekoCategory.min + pageIndex * PAGE_SIZE + i;
 
-			if (id > nekoCategory.max) {
-				break;
-			}
-
-			// If "1", this becomes "0001". If "21", this becomes "0021", and so on. to make/save the ID from the earlier fetch
-			// so the store will have the same images in sequence.
-			// since the API only returns random img in random order,
-			const imageId = id.toString().padStart(4, '0');
-
-			const url = `https://comphenix.net/zeus/api/neko/${imageId}.png`;
-
-			//refers to the link to a thumbnail of the images
-			const thumbnailUrl =
-				id >= 1 && id <= 913
-					? `https://comphenix.net/zeus/api/neko_thumbnail/${imageId}-thumbnail.png`
-					: url;
-
-			//
-			result.push({
-				url: url,
-				thumbnail: thumbnailUrl,
-			});
+		if (id > nekoCategory.max) {
+			break;
 		}
+
+		// If "1", this becomes "0001". If "21", this becomes "0021", and so on. to make/save the ID from the earlier fetch
+		// so the store will have the same images in sequence.
+		// since the API only returns random img in random order,
+		const imageId = id.toString().padStart(4, '0');
+
+		const url = `https://comphenix.net/zeus/api/neko/${imageId}.png`;
+
+		//refers to the link to a thumbnail of the images
+		const thumbnailUrl =
+			id >= 1 && id <= 913
+				? `https://comphenix.net/zeus/api/neko_thumbnail/${imageId}-thumbnail.png`
+				: url;
+		console.log(imageId);
+		//
+		result.push({
+			url: url,
+			thumbnail: thumbnailUrl,
+			imageId: uuidv4(),
+		});
 	}
 	return result;
 }

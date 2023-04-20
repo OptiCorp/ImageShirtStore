@@ -31,15 +31,19 @@ export const Tshirt = styled.div`
 
 export const Wrapper = styled.div`
 	width: 100%;
-	min-height: 100vh;
-
+	height: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-	grid-gap: 30px;
+
 	grid-template-rows: repeat(4, 1fr);
 	border-radius: 30px;
-	grid-gap: 50px;
+
 	background-color: grey;
+	@media (max-width: 500px) {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		gap: 0;
+	}
 `;
 
 export const Back = styled.div`

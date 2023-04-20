@@ -6,7 +6,7 @@ import { cartSlice } from '../components/Cart/cartSlice';
 
 export const store = configureStore({
 	reducer: {
-		nekoImages: nekoSlice.reducer,
+		nekoImageSlice: nekoSlice.reducer,
 		shop: shopSlice.reducer,
 		cart: cartSlice.reducer,
 	},

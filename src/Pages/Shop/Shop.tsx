@@ -16,11 +16,13 @@ const Shop = () => {
 
 	// const [neko, setNeko] = useState<JsonNekoImage | null>(null);
 
+	const items = useAppSelector(state => state.cart.items);
+	const imageId = useAppSelector(state => state.nekoImageSlice.imageId);
 	const { selectedNeko } = useAppSelector(state => state.shop);
 
 	return (
 		<Wrapper>
-			<SideBox item={items} selectedNeko={selectedNeko} />
+			<SideBox item={items} id={imageId} selectedNeko={selectedNeko} />
 
 			<Box>
 				<Productbox>
