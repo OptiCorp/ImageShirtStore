@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { shopSlice } from '../Pages/Shop/shopSlice';
+import { shopSlice } from '../Pages/Store/shopSlice';
 import { nekoSlice } from './imageSlice';
 import { cartSlice } from '../components/Cart/cartSlice';
 

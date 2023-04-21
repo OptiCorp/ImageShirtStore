@@ -43,8 +43,8 @@ export const Container = styled.div`
 
 export const CartButton = styled.button`
 	margin: 0;
-	width: 3rem;
-
+	min-width: 50px;
+	min-height: 40px;
 	position: relative;
 	background-color: #216bacc0;
 
@@ -94,4 +94,20 @@ export const CheckOutButtonStyled = styled.button`
 	}
 `;
 
-export const NumberItems = styled.p``;
+export const NumberItems = styled.div`
+	margin: 0 10%;
+	padding: 4%;
+	transform: translateX(20px);
+	height: 25px;
+	width: 25px;
+	background-color: #be0000;
+	border-radius: 50%;
+	display: inline-block;
+`;
+
+export const CounterNumber = styled.p`
+	color: #000000;
+	font-size: 1rem;
+
+	margin: 0;
+`;

@@ -9,6 +9,7 @@ export interface JsonNekoImage {
 	thumbnail: string;
 	imageId: string;
 	quantity: number;
+	price: number;
 }
 
 export interface NekoCategory {
@@ -24,6 +25,7 @@ export const nekoSlice = createSlice({
 	initialState: {
 		images: [] as JsonNekoImage[],
 		imageId: 0,
+		Price: 20,
 		isLoading: false,
 		error: null,
 		pageIndex: 0,
@@ -96,6 +98,8 @@ function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
 			url: url,
 			thumbnail: thumbnailUrl,
 			imageId: uuidv4(),
+			price: 20,
+			quantity: 0,
 		});
 	}
 	return result;

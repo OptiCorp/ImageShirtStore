@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JsonNekoImage } from '../../Products/imageSlice';
+import { RootState } from '../../Products/store';
 
 export interface CartState {
 	items: JsonNekoImage[];
@@ -52,6 +53,14 @@ export const cartSlice = createSlice({
 		},
 	},
 });
+
+// export function getNumItems(state: RootState) {
+// 	let NumItems = 0;
+// 	for (const id in state.cart.items) {
+// 		NumItems += state.cart.id;
+// 	}
+// 	return parseInt(`${NumItems}`);
+// }
 
 export default cartSlice.reducer;
 export const { addToCart, removeItem, incrementQuantity, decrementQuantity } = cartSlice.actions;

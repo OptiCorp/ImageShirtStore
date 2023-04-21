@@ -36,9 +36,8 @@ export const Wrapper = styled.div`
 	grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
 
 	grid-template-rows: repeat(4, 1fr);
-	border-radius: 30px;
 
-	background-color: grey;
+	background-color: #efefef;
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr;
@@ -112,9 +111,9 @@ export const ProductPriceSmall = styled.h1`
 
 	text-decoration: line-through;
 	display: inline-block;
-	margin-right: 5px;
-	font-size: 18px;
 
+	font-size: 14px;
+	margin: 0 auto;
 	color: #fbb72c;
 	font-weight: 600;
 `;
@@ -130,9 +129,11 @@ export const ProductBottom = styled.div`
 `;
 
 export const ProductPrice = styled.h2`
-	font-size: 18px;
+	font-size: 28px;
+
 	color: #fbb72c;
 
+	margin: 0 auto;
 	font-weight: 600;
 `;
 

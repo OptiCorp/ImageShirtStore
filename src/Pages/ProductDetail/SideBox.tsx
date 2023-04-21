@@ -13,7 +13,7 @@ import { NekoImages } from '../../Products/ImageList';
 import { addToCart } from '../../components/Cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useDispatch } from 'react-redux';
-import { shopSlice } from '../Shop/shopSlice';
+import { shopSlice } from '../Store/shopSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

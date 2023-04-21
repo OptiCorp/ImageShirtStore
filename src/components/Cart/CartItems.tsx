@@ -1,21 +1,17 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addToCart, cartSlice } from './cartSlice';
-import { JsonNekoImage } from '../../Products/imageSlice';
+
 import { useAppSelector } from '../../hooks/hooks';
-import { nekoSlice } from '../../Products/imageSlice';
-import NekosImage from 'nekosapi/lib/NekosImage';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { removeItem, decrementQuantity, incrementQuantity } from './cartSlice';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
-import { MDBRow, MDBCol, MDBInput, MDBCheckbox, MDBBtn } from 'mdb-react-ui-kit';
 
 import {
 	CartBox,
 	CartItemContainer,
 	Tshirt,
 	StyledCartItem,
-	Card,
+	CardMain,
 	Title,
 	Info,
 	CardTop,
@@ -25,19 +21,53 @@ import {
 	NumberBox,
 	Form,
 	ContainerCart,
+	Summary,
+	FormWrapper,
+	FormStyle,
+	StyledLabel,
+	SubmitInput,
+	StyledInput,
 } from './styles';
+import { useDispatch } from 'react-redux';
+
+type FormValues = {
+	firstName: string;
+	lastName: string;
+	email: string;
+	address: string;
+	country: string;
+	zipcode: number;
+	city: string;
+	state: string;
+	password: { value: number };
+};
+
+export const getTotal = () => {
+	const cart = useAppSelector(state => state.cart.items);
+	let totalQuantity = 0;
+	let totalPrice = 0;
+	cart.forEach(item => {
+		totalQuantity += item.quantity;
+		totalPrice += item.price * item.quantity;
+	});
+	return { totalPrice, totalQuantity };
+};
+
+export const getTotalQuantity = () => {
+	const cart = useAppSelector(state => state.cart.items);
+	let total = 0;
+	cart.forEach(item => {
+		total += item.quantity;
+	});
+	return total;
+};
 
 export const Cart = () => {
 	const dispatch = useDispatch();
 	const cart = useAppSelector(state => state.cart.items);
 
-	const getTotalQuantity = () => {
-		let total = 0;
-		cart.forEach(item => {
-			total += item.quantity;
-		});
-		return total;
-	};
+	const { register, handleSubmit } = useForm<FormValues>();
+	const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
 
 	return (
 		<ContainerCart>
@@ -46,13 +76,15 @@ export const Cart = () => {
 				{cart.map(item => {
 					return (
 						<CartItemContainer key={item.imageId}>
-							<Card>
+							<CardMain>
 								<Tshirt>
 									<StyledCartItem src={item.url} />
 								</Tshirt>
 								<Info>
 									<Title>T shirt</Title>
-									<Price>$20</Price>
+									<Price>
+										<p>${item.price}</p>
+									</Price>
 
 									<CardButton onClick={() => dispatch(removeItem(item.imageId))}>
 										Remove
@@ -73,45 +105,46 @@ export const Cart = () => {
 										/>
 									</NumberBox>
 								</Info>
-							</Card>
+							</CardMain>
 						</CartItemContainer>
 					);
 				})}
 			</CartBox>
-			<form>
-				<MDBRow className='mb-4'>
-					<MDBCol>
-						<MDBInput id='form6Example1' label='First name' />
-					</MDBCol>
-					<MDBCol>
-						<MDBInput id='form6Example2' label='Last name' />
-					</MDBCol>
-				</MDBRow>
 
-				<MDBInput wrapperClass='mb-4' id='form6Example3' label='Company name' />
-				<MDBInput wrapperClass='mb-4' id='form6Example4' label='Address' />
-				<MDBInput wrapperClass='mb-4' type='email' id='form6Example5' label='Email' />
-				<MDBInput wrapperClass='mb-4' type='tel' id='form6Example6' label='Phone' />
+			<FormWrapper>
+				<Summary>
+					<Number>
+						total ({getTotal().totalQuantity} items) :{' '}
+						<strong>${getTotal().totalPrice}</strong>
+					</Number>
+				</Summary>
+				<FormStyle onSubmit={handleSubmit(onSubmit)}>
+					<StyledLabel>Email</StyledLabel>
+					<StyledInput type='email' {...register('email')} />
+					<StyledLabel>First Name</StyledLabel>
+					<StyledInput {...register('firstName')} />
+					<StyledLabel>Last Name</StyledLabel>
+					<StyledInput {...register('lastName')} />
+					<StyledLabel>Street</StyledLabel>
+					<StyledInput {...register('address')} />
+					<StyledLabel>City</StyledLabel>
+					<StyledInput {...register('city')} />
+					<StyledLabel>State</StyledLabel>
+					<StyledInput {...register('state')} />
+					<StyledLabel>Zip</StyledLabel>
+					<StyledInput {...register('zipcode')} />
+					<StyledLabel>Country</StyledLabel>
+					<StyledInput {...register('country')} />
+					<StyledLabel>Credit Card information</StyledLabel>
+					<StyledInput type='password' {...register('password')} />
+					<StyledLabel>EXP</StyledLabel>
+					<StyledInput type='password' {...register('password')} />
+					<StyledLabel>CCV</StyledLabel>
+					<StyledInput type='password' {...register('password')} />
 
-				<MDBInput
-					wrapperClass='mb-4'
-					textarea
-					id='form6Example7'
-					rows={4}
-					label='Additional information'
-				/>
-
-				<MDBCheckbox
-					wrapperClass='d-flex justify-content-center mb-4'
-					id='form6Example8'
-					label='Create an account?'
-					defaultChecked
-				/>
-
-				<MDBBtn className='mb-4' type='submit' block>
-					Place order
-				</MDBBtn>
-			</form>
+					<SubmitInput type='submit' />
+				</FormStyle>
+			</FormWrapper>
 		</ContainerCart>
 	);
 };

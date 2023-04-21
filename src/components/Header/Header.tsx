@@ -1,6 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
-import { Wrapper, Links, Button, CartButton, CheckOutButtonStyled } from './styles';
+import {
+	Wrapper,
+	Links,
+	Button,
+	CartButton,
+	CheckOutButtonStyled,
+	NumberItems,
+	CounterNumber,
+} from './styles';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -11,8 +20,6 @@ import cartSlice from '../Cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/hooks';
 import useModal from '../../hooks/useModal';
-import { VscCircleLargeFilled } from 'react-icons/vsc';
-import Badge from 'react-bootstrap/Badge';
 
 import CartPreview from '../Cart/CartPreview';
 
@@ -55,10 +62,15 @@ const Header: FunctionComponent<THeader> = () => {
 				<Link to={'Login'}>
 					<h1>Login</h1>
 				</Link>
-				<Badge color='primary'>{getTotalQuantity() || 0} </Badge>{' '}
-				<CartButton onClick={toggle}>
+				<CartButton onClick={toggle} aria-label='cart'>
+					<NumberItems>
+						<CounterNumber>{getTotalQuantity() || 0}</CounterNumber>
+					</NumberItems>{' '}
+					<FiShoppingCart />
+				</CartButton>
+				{/* <CartButton onClick={toggle}>
 					<FiShoppingCart size={30}></FiShoppingCart>
-				</CartButton>{' '}
+				</CartButton>{' '} */}
 			</Links>
 		</Wrapper>
 	);

@@ -11,8 +11,12 @@ import {
 	CloseButtonStyled,
 	StyledProductPreview,
 	CardPreview,
+	Number,
+	NumbermodalCart,
+	Summary,
 } from './styles';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { getTotal, getTotalQuantity } from './CartItems';
 
 interface ModalType {
 	children?: ReactNode;
@@ -35,8 +39,8 @@ export default function CartPreview(props: ModalType) {
 						{cart.map(item => {
 							return (
 								<CardPreview key={item.imageId}>
+									<NumbermodalCart>{item.quantity}</NumbermodalCart>{' '}
 									<StyledProductPreview src={item.url} key={item.imageId} />
-									<h1>{item.quantity}</h1>
 								</CardPreview>
 							);
 						})}

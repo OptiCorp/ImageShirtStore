@@ -4,7 +4,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import '././styles/App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from './Pages/Home/Home';
-import { Shop } from './Pages/Shop/Shop';
+import { Shop } from './Pages/Store/Shop';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './Pages/Login/Login';
