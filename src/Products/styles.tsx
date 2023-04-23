@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const IndexButton = styled.button`
-	margin: 1rem 0;
+	margin: 1rem auto;
 	min-width: 2rem;
 
 	background-color: #216bacc0;
 
-	display: inline-block;
+	display: inline;
+
 	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
 	border: 0;
 	border-radius: 12px;

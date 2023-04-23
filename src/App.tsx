@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { FiShoppingCart } from 'react-icons/fi';
+
 import '././styles/App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from './Pages/Home/Home';
@@ -11,10 +10,8 @@ import { Login } from './Pages/Login/Login';
 import { About } from './Pages/About/About';
 import { Cart } from './components/Cart/CartItems';
 import 'react-toastify/dist/ReactToastify.css';
-import useModal from './hooks/useModal';
-import { Link } from 'react-router-dom';
 
-import CartPreview from './components/Cart/CartPreview';
+import CartPreview from './components/Cart/CartPreview/CartPreview';
 function App(): JSX.Element {
 	return (
 		<div className='App'>

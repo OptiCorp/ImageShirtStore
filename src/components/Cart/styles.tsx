@@ -16,6 +16,15 @@ export const CartBox = styled.div`
 	grid-column: 1/1;
 `;
 
+export const NoItems = styled.h2`
+	font-size: 2rem;
+	margin: 20% auto;
+
+	display: inline;
+
+	color: black;
+`;
+
 export const ContainerCart = styled.div`
 	width: 100%;
 
@@ -144,65 +153,6 @@ export const CardButton = styled.button`
 	}
 `;
 
-export const Modaloverlay = styled.div`
-	backdrop-filter: blur(2px);
-	position: absolute;
-	background-color: #00000066;
-	min-width: 500px;
-	top: 0;
-	min-height: 100%;
-	max-height: 500px;
-	overflow-y: scroll;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	z-index: 1;
-`;
-export const ModalBox = styled.div`
-	background: white;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	position: relative;
-	top: 10%;
-	left: 50%;
-	transform: translate(-50%);
-	width: 30rem;
-	z-index: 2;
-`;
-export const CloseButtonStyled = styled.button`
-	background: none;
-	border: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	cursor: pointer;
-	font-size: 1.5em;
-
-	&:hover {
-		scale: 90%;
-	}
-`;
-
-export const StyledProductPreview = styled.img`
-	min-height: 100px;
-	margin: 1rem;
-	width: 30%;
-`;
-
-export const CardPreview = styled.div`
-	width: 100%;
-	max-height: 200px;
-	margin: 0 auto;
-	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #ffffff88;
-`;
-
 export const Number = styled.p`
 	font-size: 30px;
 	font-weight: 600;
@@ -211,13 +161,6 @@ export const Number = styled.p`
 	color: #000000;
 `;
 
-export const NumbermodalCart = styled.p`
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 42px;
-	margin: 0;
-	color: #000000;
-`;
 export const NumberBox = styled.div`
 	width: 100%;
 	height: 3rem;
@@ -232,7 +175,7 @@ export const NumberBox = styled.div`
 	background-color: #5f5f3f86;
 `;
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.div<{ stateValue: boolean }>`
 	margin-top: 5%;
 	width: 90%;
 	min-width: 300px;
@@ -243,6 +186,8 @@ export const FormWrapper = styled.div`
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 	box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
 	animation: slideUp 2000ms ease;
+	opacity: ${props => (props.stateValue ? '100%' : '20%')};
+	pointer-events: ${props => (props.stateValue ? 'all' : 'none')};
 `;
 
 export const Summary = styled.div`

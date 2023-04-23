@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+import header from '../../images/banner1.png';
 
 export const Wrapper = styled.div`
 	padding: 10px;
@@ -9,7 +10,7 @@ export const Wrapper = styled.div`
 	flex-direction: row;
 	margin: 0;
 	max-height: 10rem;
-	background-color: #4f85b5;
+	background-color: blue;
 `;
 
 export const Links = styled.div`
@@ -73,7 +74,8 @@ export const CheckOutButtonStyled = styled.button`
 	border: none;
 	margin: 3rem;
 	cursor: pointer;
-
+	height: 2rem;
+	border-radius: 20px;
 	font-weight: 600;
 	line-height: 20%;
 	outline: transparent;
@@ -88,9 +90,11 @@ export const CheckOutButtonStyled = styled.button`
 	font-size: 1.5em;
 
 	&:hover {
-		cursor: pointer;
 		box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-		transform: translate(-4px, 4px);
+	}
+
+	&:active {
+		scale: 80%;
 	}
 `;
 

@@ -26,7 +26,7 @@ export const SideBoxMain = styled.div`
 `;
 
 export const ProductImage = styled.div`
-	min-height: 600px;
+	min-height: 50%;
 	min-width: 500px;
 
 	margin: 8rem 0;

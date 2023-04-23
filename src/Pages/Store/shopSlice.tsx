@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Reducer } from '@reduxjs/toolkit';
 
 import { JsonNekoImage } from '../../Products/imageSlice';
 
@@ -13,3 +13,5 @@ export const shopSlice = createSlice({
 		},
 	},
 });
+
+export const ShopReducer = shopSlice.reducer;

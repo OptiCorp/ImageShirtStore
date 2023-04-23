@@ -34,8 +34,8 @@ export const Wrapper = styled.div`
 	grid-template-rows: 1fr;
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 100vh;
-		gap: 50px;
+		grid-template-rows: 1fr;
+		gap: 30px;
 	}
 `;
 

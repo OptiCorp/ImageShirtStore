@@ -7,7 +7,7 @@ import { nekoSlice, JsonNekoImage, NekoCategory } from './imageSlice';
 import '../styles/index.css';
 import { IndexButton } from './styles';
 import { v4 as uuidv4 } from 'uuid';
-import { v4 as uuid } from 'uuid';
+
 uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 export interface NekoProps {
@@ -20,7 +20,7 @@ export const NekoImages = (props: NekoProps) => {
 	const [selectedNeko, setSelectedNeko] = useState<JsonNekoImage | null>(null);
 
 	const { images, isLoading, error, pageIndex, pageCount, nekoCategory } = useAppSelector(
-		state => state.nekoImageSlice
+		state => state.reducer.nekoImageSlice
 	);
 
 	// event handler with the image that goes to the t shirt

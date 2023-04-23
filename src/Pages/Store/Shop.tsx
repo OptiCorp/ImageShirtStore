@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import { Box, Wrapper, Productbox } from './styles';
 import { NekoImages } from '../../Products/ImageList';
-import { JsonNekoImage } from '../../Products/imageSlice';
+
 import SideBox from '../ProductDetail/SideBox';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,9 +16,9 @@ const Shop = () => {
 
 	// const [neko, setNeko] = useState<JsonNekoImage | null>(null);
 
-	const items = useAppSelector(state => state.cart.items);
-	const imageId = useAppSelector(state => state.nekoImageSlice.imageId);
-	const { selectedNeko } = useAppSelector(state => state.shop);
+	const items = useAppSelector(state => state.reducer.cart.items);
+	const imageId = useAppSelector(state => state.reducer.nekoImageSlice.imageId);
+	const selectedNeko = useAppSelector(state => state.reducer.shop.selectedNeko);
 
 	return (
 		<Wrapper>

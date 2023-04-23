@@ -7,40 +7,42 @@ import Product4 from '../../images/model4.png';
 import Wallpaper from '../../images/souljazk_high_converting_youtube_thumbnail_vibrant_orange_borde_cd3bf03f-1950-484e-b3da-b0778e4c2029.png';
 import Texture from '../../images/Buzuk_gradient_background_2fe3fec5-8e3f-49e1-aa29-362438869b4e.png';
 import backk from '../../images/backk.png';
+import backgroundphone from '../../images/backphone.png';
 import Product5 from '../../images/bigtshirt.png';
 
-export const Card2 = styled.div`
+export const CardInsideCover = styled.div`
 	width: 400px;
 	border-radius: 20px;
-	display: flex;
 	background-color: #ffffff50;
-	margin: 5% 400px;
-	grid-gap: 1rem;
+	margin: 5% 20%;
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	grid-column: 1/1;
 `;
-
 export const Tshirt = styled.div`
 	background-image: url(${Shirt});
-	background-size: 100%;
+	background-size: contain;
 	background-repeat: no-repeat;
 	min-height: 400px;
 	width: 100%;
 	flex: 1;
-	margin: 0 10%;
-	position: relative;
 `;
 
 export const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
 
 	grid-template-rows: repeat(4, 1fr);
 
 	background-color: #efefef;
 	@media (max-width: 500px) {
+		min-height: 100vh;
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
+		grid-template-rows: 1fr 1fr 100vh;
 		gap: 0;
 	}
 `;
@@ -49,20 +51,36 @@ export const Back = styled.div`
 	background-image: url(${Texture});
 	background-size: 100%;
 	background-repeat: no-repeat;
-	width: 100%;
+
 	padding-bottom: 3%;
 
 	margin: 50px 0;
 `;
 
-export const Back2 = styled.div`
-	background-image: url(${backk});
-	background-size: cover;
-	background-repeat: no-repeat;
+export const Cover = styled.div`
+	grid-template-columns: 1fr 1fr;
+
 	width: 100%;
 
-	background-position: right;
+	display: grid;
+`;
+
+export const Back2 = styled.div`
+	background-image: url(${backk});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	grid-column: span 2;
 	margin: 0;
+	width: 100%;
+	margin: 0;
+
+	@media (max-width: 500px) {
+		background-image: url(${backgroundphone});
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 `;
 export const MenuWrapper = styled.div`
 	border: 10px solid orange;

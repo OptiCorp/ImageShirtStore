@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import React from 'react';
-import { useState, useEffect } from 'react';
+
 import {
 	Wrapper,
 	Links,
@@ -12,16 +12,12 @@ import {
 } from './styles';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Menu } from '@equinor/eds-core-react';
-import { Cart } from '../Cart/CartItems';
-import cartSlice from '../Cart/cartSlice';
+
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/hooks';
 import useModal from '../../hooks/useModal';
 
-import CartPreview from '../Cart/CartPreview';
+import CartPreview from '../Cart/CartPreview/CartPreview';
 
 type THeader = {
 	viewCart: boolean;
@@ -31,7 +27,7 @@ type THeader = {
 
 const Header: FunctionComponent<THeader> = () => {
 	const dispatch = useDispatch();
-	const cart = useAppSelector(state => state.cart.items);
+	const cart = useAppSelector(state => state.reducer.cart.items);
 	const { isOpen, toggle } = useModal();
 
 	const getTotalQuantity = () => {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Reducer } from '@reduxjs/toolkit';
 
 import { v4 as uuidv4 } from 'uuid';
 import { v4 as uuid } from 'uuid';
@@ -68,6 +68,8 @@ export const nekoSlice = createSlice({
 	},
 });
 
+export const NekoReducer = nekoSlice.reducer;
+
 // page numbers, id=min(1) if its more then it breaks on the max(913),
 function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
 	const result: JsonNekoImage[] = [];
@@ -92,7 +94,7 @@ function getPageImages(pageIndex: number, nekoCategory: NekoCategory | null) {
 			id >= 1 && id <= 913
 				? `https://comphenix.net/zeus/api/neko_thumbnail/${imageId}-thumbnail.png`
 				: url;
-		console.log(imageId);
+
 		//
 		result.push({
 			url: url,

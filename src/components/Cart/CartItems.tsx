@@ -2,8 +2,10 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import { useAppSelector } from '../../hooks/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { removeItem, decrementQuantity, incrementQuantity } from './cartSlice';
+
+import { removeItem, decrementQuantity, incrementQuantity, clearCart } from './cartSlice';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 
 import {
@@ -19,7 +21,6 @@ import {
 	CardButton,
 	Number,
 	NumberBox,
-	Form,
 	ContainerCart,
 	Summary,
 	FormWrapper,
@@ -27,6 +28,7 @@ import {
 	StyledLabel,
 	SubmitInput,
 	StyledInput,
+	NoItems,
 } from './styles';
 import { useDispatch } from 'react-redux';
 
@@ -43,7 +45,7 @@ type FormValues = {
 };
 
 export const getTotal = () => {
-	const cart = useAppSelector(state => state.cart.items);
+	const cart = useAppSelector(state => state.reducer.cart.items);
 	let totalQuantity = 0;
 	let totalPrice = 0;
 	cart.forEach(item => {
@@ -54,7 +56,7 @@ export const getTotal = () => {
 };
 
 export const getTotalQuantity = () => {
-	const cart = useAppSelector(state => state.cart.items);
+	const cart = useAppSelector(state => state.reducer.cart.items);
 	let total = 0;
 	cart.forEach(item => {
 		total += item.quantity;
@@ -64,54 +66,67 @@ export const getTotalQuantity = () => {
 
 export const Cart = () => {
 	const dispatch = useDispatch();
-	const cart = useAppSelector(state => state.cart.items);
+	const cart = useAppSelector(state => state.reducer.cart.items);
 
-	const { register, handleSubmit } = useForm<FormValues>();
-	const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+	const { register, handleSubmit, reset } = useForm<FormValues>();
+
+	const onSubmit = (data: FormValues) => {
+		console.log(data);
+		reset();
+	};
+
+	const stateValue = useAppSelector(state => state.reducer.cart.hasItems);
 
 	return (
 		<ContainerCart>
-			<CartBox>
-				<CardTop />
-				{cart.map(item => {
-					return (
-						<CartItemContainer key={item.imageId}>
-							<CardMain>
-								<Tshirt>
-									<StyledCartItem src={item.url} />
-								</Tshirt>
-								<Info>
-									<Title>T shirt</Title>
-									<Price>
-										<p>${item.price}</p>
-									</Price>
+			{cart.length === 0 ? (
+				<NoItems> Cart is empty</NoItems>
+			) : (
+				<CartBox>
+					<CardTop />
 
-									<CardButton onClick={() => dispatch(removeItem(item.imageId))}>
-										Remove
-									</CardButton>
-									<NumberBox>
-										<AiOutlineMinusCircle
-											size={30}
-											onClick={() =>
-												dispatch(decrementQuantity(item.imageId))
-											}
-										/>
-										<Number>{item.quantity}</Number>
-										<AiOutlinePlusCircle
-											size={30}
-											onClick={() =>
-												dispatch(incrementQuantity(item.imageId))
-											}
-										/>
-									</NumberBox>
-								</Info>
-							</CardMain>
-						</CartItemContainer>
-					);
-				})}
-			</CartBox>
+					{cart.map(item => {
+						return (
+							<CartItemContainer key={item.imageId}>
+								<CardMain>
+									<Tshirt>
+										<StyledCartItem src={item.url} />
+									</Tshirt>
+									<Info>
+										<Title>T shirt</Title>
+										<Price>
+											<p>${item.price}</p>
+										</Price>
 
-			<FormWrapper>
+										<CardButton
+											onClick={() => dispatch(removeItem(item.imageId))}
+										>
+											Remove
+										</CardButton>
+										<NumberBox>
+											<AiOutlineMinusCircle
+												size={30}
+												onClick={() =>
+													dispatch(decrementQuantity(item.imageId))
+												}
+											/>
+											<Number>{item.quantity}</Number>
+											<AiOutlinePlusCircle
+												size={30}
+												onClick={() =>
+													dispatch(incrementQuantity(item.imageId))
+												}
+											/>
+										</NumberBox>
+									</Info>
+								</CardMain>
+							</CartItemContainer>
+						);
+					})}
+				</CartBox>
+			)}
+
+			<FormWrapper stateValue={stateValue}>
 				<Summary>
 					<Number>
 						total ({getTotal().totalQuantity} items) :{' '}
@@ -142,7 +157,7 @@ export const Cart = () => {
 					<StyledLabel>CCV</StyledLabel>
 					<StyledInput type='password' {...register('password')} />
 
-					<SubmitInput type='submit' />
+					<SubmitInput type='submit' onClick={() => dispatch(clearCart())} />
 				</FormStyle>
 			</FormWrapper>
 		</ContainerCart>

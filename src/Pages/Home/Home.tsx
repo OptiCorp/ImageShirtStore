@@ -15,17 +15,20 @@ import {
 	Productdetails,
 	Back,
 	Back2,
-	Card2,
+	CardInsideCover,
+	Cover,
 } from './styles';
 
 const Home: React.FC = (): JSX.Element => {
 	return (
 		<Wrapper>
-			<Back2>
-				<Card2>
-					<Tshirt />
-				</Card2>
-			</Back2>
+			<Cover>
+				<Back2>
+					<CardInsideCover>
+						<Tshirt />
+					</CardInsideCover>
+				</Back2>
+			</Cover>
 			<MenuWrapper>
 				<Card>
 					<Back>

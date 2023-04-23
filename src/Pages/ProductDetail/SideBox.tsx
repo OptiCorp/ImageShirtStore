@@ -9,11 +9,11 @@ import {
 	IndexButton,
 } from './styles';
 import { JsonNekoImage } from '../../Products/imageSlice';
-import { NekoImages } from '../../Products/ImageList';
+
 import { addToCart } from '../../components/Cart/cartSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+
 import { useDispatch } from 'react-redux';
-import { shopSlice } from '../Store/shopSlice';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,8 +25,6 @@ interface Props {
 
 const SideBox: FunctionComponent<Props> = ({ selectedNeko, items, id }) => {
 	const dispatch = useDispatch();
-
-	console.log(selectedNeko);
 
 	const handleToCart = (item: JsonNekoImage) => {
 		dispatch(addToCart(item));
