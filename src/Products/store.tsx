@@ -2,7 +2,7 @@ import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/t
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { ShopReducer, shopSlice } from '../Pages/Store/shopSlice';
 import { NekoReducer, nekoSlice } from './imageSlice';
-import { cartSlice } from '../components/Cart/cartSlice';
+
 import storage from 'redux-persist/lib/storage';
 import {
 	persistReducer,
@@ -15,7 +15,6 @@ import {
 	persistStore,
 } from 'redux-persist';
 import { cartReducer } from '../components/Cart/cartSlice';
-import { Shop } from '../Pages/Store/Shop';
 
 const persistConfig = {
 	key: 'root',

@@ -16,14 +16,14 @@ function App(): JSX.Element {
 	return (
 		<div className='App'>
 			<section className='gridheader'>
-				<Header />
+				<Header viewCart={false} />
 			</section>
 			<section className='gridpages'>
 				<Routes>
 					<Route path='/' element={<Home />} />
 
 					<Route path='Shop' element={<Shop />} />
-					<Route path='CartItems' element={<Cart />} />
+					<Route path='CartItems' element={<Cart viewCart={false} />} />
 					<Route path='About' element={<About />} />
 					<Route path='Login' element={<Login />} />
 					<Route path='*' element={<Navigate to='/' replace />} />

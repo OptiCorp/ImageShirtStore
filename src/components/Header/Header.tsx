@@ -19,11 +19,7 @@ import useModal from '../../hooks/useModal';
 
 import CartPreview from '../Cart/CartPreview/CartPreview';
 
-type THeader = {
-	viewCart: boolean;
-
-	primary?: boolean;
-};
+type THeader = {};
 
 const Header: FunctionComponent<THeader> = () => {
 	const dispatch = useDispatch();

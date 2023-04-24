@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import { useAppSelector } from '../../../hooks/hooks';
 import React, { FunctionComponent, useState, useEffect, ReactNode } from 'react';
 import { useSelector, useDispatch } from 'react-redux';

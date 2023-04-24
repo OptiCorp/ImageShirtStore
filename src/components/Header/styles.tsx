@@ -5,12 +5,14 @@ import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import header from '../../images/banner1.png';
 
 export const Wrapper = styled.div`
-	padding: 10px;
 	display: flex;
 	flex-direction: row;
 	margin: 0;
-	max-height: 10rem;
-	background-color: blue;
+
+	min-height: 200px;
+	background-image: url(${header});
+	background-repeat: no-repeat;
+	background-size: 100%;
 `;
 
 export const Links = styled.div`
