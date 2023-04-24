@@ -80,12 +80,10 @@ export const DialogCartPopup = styled(Dialog)`
 `;
 export const CheckOutButtonStyled = styled.button`
 	border: none;
-	bottom: 3%;
-	right: 0;
-	left: 0;
+
 	margin: 0 auto;
 	width: 80%;
-	position: absolute;
+
 	cursor: pointer;
 	height: 4rem;
 	border-radius: 20px;
