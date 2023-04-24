@@ -1,65 +1,32 @@
 import styled from 'styled-components';
+import { Dialog } from '@equinor/eds-core-react';
 
-export const Modaloverlay = styled.div`
-	backdrop-filter: blur(10px);
-	position: absolute;
-	background-color: #00000066;
-	min-width: 500px;
-	top: 0;
-	min-height: 100%;
-	max-height: 500px;
-	overflow-y: scroll;
-
-	right: 0;
-	bottom: 0;
+export const ModalBox = styled.div`
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	z-index: 1;
-`;
-export const ModalBox = styled.div`
-	background: white;
-	border: 1px solid #ccc;
+	padding-bottom: 20%;
 	border-radius: 4px;
-	position: relative;
-	top: 10%;
-	left: 50%;
-	transform: translate(-50%);
 	width: 20rem;
-	z-index: 2;
-`;
-export const CloseButtonStyled = styled.button`
-	background: none;
-	border: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	cursor: pointer;
-	font-size: 1.5em;
-
-	&:hover {
-		scale: 90%;
-	}
 `;
 
 export const StyledProductPreview = styled.img`
 	height: 130px;
-	margin: 1rem;
+	margin: 2rem 0;
 	width: 100px;
 `;
 
 export const CardPreview = styled.div`
 	width: 100%;
-	max-height: 200px;
-	margin: 0 auto;
+	background-color: #ffffff;
+	margin: 1rem auto;
+
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
-	background-color: #ffffff88;
 `;
 
 export const CardButton = styled.button`
@@ -100,4 +67,42 @@ export const NumbermodalCart = styled.p`
 	line-height: 42px;
 	margin: 0;
 	color: #000000;
+`;
+export const DialogCartPopup = styled(Dialog)`
+	background-color: aliceblue;
+	overflow: scroll;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	min-width: 400px;
+`;
+export const CheckOutButtonStyled = styled.button`
+	border: none;
+	bottom: 3%;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	width: 80%;
+	position: absolute;
+	cursor: pointer;
+	height: 4rem;
+	border-radius: 20px;
+	font-weight: 600;
+	line-height: 20%;
+	outline: transparent;
+	padding: 2%;
+	transition: box-shadow 0.2s ease-in-out;
+	color: #2c3e50;
+	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+	font-size: 1.5em;
+
+	&:hover {
+		box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+	}
+
+	&:active {
+		scale: 80%;
+	}
 `;

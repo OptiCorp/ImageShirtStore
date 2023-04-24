@@ -1,22 +1,28 @@
 import styled from 'styled-components';
+import { Dialog } from '@equinor/eds-core-react';
 
 export const FormWrapper = styled.div`
-	margin-top: 5%;
-	width: 90%;
-	min-width: 300px;
+	margin: 3rem 0;
+	width: 80%;
 
-	display: block;
+	grid-column: 2/2;
+	border-radius: 20px;
 	background-color: coral;
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 	box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
-	animation: slideUp 2000ms ease;
+	@media (max-width: 500px) {
+		min-height: 50px;
+		max-height: 50px;
+		grid-column: 1/1;
+		grid-row: 2/2;
+	}
 `;
 
 export const Summary = styled.div`
 	padding: 1%;
-	width: 80%;
-	margin: 4% 0;
+	width: 500px;
+
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
 		rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
@@ -42,26 +48,26 @@ export const StyledInput = styled.input`
 	min-width: 30%;
 	font-size: 1rem;
 	letter-spacing: 0.15rem;
-
-	margin-top: 5px;
-
-	border-radius: 4px;
+	box-sizing: border-box;
+	padding: 8px;
+	border-radius: 6px;
+	border: 2px solid #fff;
 `;
 
 export const StyledLabel = styled.label`
 	text-transform: uppercase;
-	font-size: 12px;
+	font-size: 16px;
 	letter-spacing: 2px;
 	color: $maroon;
-	background-color: #e4dccfa7;
-	width: 20px;
 `;
 
 export const SubmitInput = styled.input`
-	margin: 30px 0;
-	height: 30px;
+	margin: 0 auto;
+	height: 3rem;
 	cursor: pointer;
-	width: 40%;
+	grid-column: 2/2;
+	grid-row: 3/3;
+	width: 80%;
 	color: #cfc9e1;
 	background-color: #4a3b76;
 	text-transform: uppercase;
@@ -94,7 +100,6 @@ export const CartButton = styled.button`
 	min-height: 40px;
 	position: relative;
 	background-color: #216bacc0;
-
 	display: inline-block;
 	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
 	border: 0;
@@ -103,7 +108,6 @@ export const CartButton = styled.button`
 	cursor: pointer;
 	font-weight: 600;
 	outline: transparent;
-	transition: box-shadow 0.2s ease-in-out;
 	text-align: center;
 	text-decoration: none;
 	&:hover {
@@ -114,4 +118,59 @@ export const CartButton = styled.button`
 		box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
 			0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 	}
+`;
+
+export const SpanFieldContainer = styled.span`
+	display: grid;
+	grid-template-columns: min(50%) 40% 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	align-items: center;
+	border-radius: 20px;
+	justify-items: center;
+	grid-gap: 20px;
+	@media (max-width: 500px) {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+
+		grid-gap: 20px;
+	}
+`;
+
+export const SpanField1 = styled.span`
+	border: 1px solid grey;
+	padding: 0.5rem;
+
+	grid-column: span 2;
+	width: 100%;
+	border-radius: 1rem;
+	color: #000000;
+`;
+
+export const SpanField2 = styled.span`
+	border: 1px solid grey;
+	padding: 0.5rem;
+	width: 100%;
+	grid-row: 2/2;
+	border-radius: 1rem;
+	color: #000000;
+`;
+
+export const SpanField3 = styled.span`
+	border: 1px solid grey;
+	padding: 0.5rem;
+	border-radius: 1rem;
+	grid-row: 2/2;
+	grid-column: 2/2;
+	width: 50%;
+
+	color: #000000;
+`;
+
+export const SpanField4 = styled.span`
+	border: 1px solid grey;
+	padding: 0.5rem;
+	grid-row: 3/3;
+	grid-column: 1/1;
+
+	border-radius: 1rem;
 `;

@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import Shirt from '../../images/Framecollection.png';
 import Product1 from '../../images/Roran_neko_girl_fullhd_realistic_white_t-shirt_0598cf25-9763-4c70-8cba-8286b6afe49b.png';
 import Product2 from '../../images/whiteshirtmodel.png';
-import Product3 from '../../images/model3.png';
+
 import Product4 from '../../images/model4.png';
-import Wallpaper from '../../images/souljazk_high_converting_youtube_thumbnail_vibrant_orange_borde_cd3bf03f-1950-484e-b3da-b0778e4c2029.png';
+
 import Texture from '../../images/Buzuk_gradient_background_2fe3fec5-8e3f-49e1-aa29-362438869b4e.png';
 import backk from '../../images/backk.png';
 import backgroundphone from '../../images/backphone.png';
-import Product5 from '../../images/bigtshirt.png';
 
 export const CardInsideCover = styled.div`
 	width: 400px;
@@ -36,7 +35,7 @@ export const Wrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
 
-	grid-template-rows: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 
 	background-color: #efefef;
 	@media (max-width: 500px) {

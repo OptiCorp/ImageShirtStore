@@ -3,17 +3,22 @@ import Texture from '../../images/Buzuk_gradient_background_2fe3fec5-8e3f-49e1-a
 import Shirt from '../../images/36634-6-blank-white-t-shirt-template.png';
 
 export const CartBox = styled.div`
-	min-width: 800px;
-
-	height: 800px;
+	width: 100%;
+	min-width: 500px;
 	background-color: #ffdfdf;
-	margin: 5% auto;
+	margin: 0 auto;
 	background-image: url(${Texture});
 	background-size: cover;
-	margin: 5% 0;
+	min-height: 900px;
+	max-height: 300px;
 	background-repeat: no-repeat;
 	overflow-y: scroll;
 	grid-column: 1/1;
+	grid-row: 1/1;
+	@media (max-width: 500px) {
+		min-height: 200px;
+		max-height: 400px;
+	}
 `;
 
 export const NoItems = styled.h2`
@@ -26,26 +31,27 @@ export const NoItems = styled.h2`
 `;
 
 export const ContainerCart = styled.div`
-	width: 100%;
-
+	width: 95%;
+	grid-gap: 30px;
 	display: grid;
-	grid-gap: 100px;
+	justify-items: center;
+	grid-template-rows: 1fr;
 	grid-template-columns: 1fr 1fr;
 	margin: 0;
 
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 1fr;
+		grid-template-rows: min(400px) min(300px) min(400px);
 		min-height: 100vh;
 		grid-gap: 0px;
 	}
 `;
 
 export const CartItemContainer = styled.div`
-	margin: 0;
-	align-items: center;
+	margin: 0 10%;
+
 	padding: 2rem;
-	width: 49%;
+	width: 30rem;
 `;
 
 export const StyledCartItem = styled.img`
@@ -68,7 +74,6 @@ export const Tshirt = styled.div`
 
 export const CardMain = styled.div`
 	width: 100%;
-	min-height: 350px;
 
 	margin: 0 auto;
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -78,7 +83,7 @@ export const CardMain = styled.div`
 
 	background-color: #ffffffaf;
 	@media (max-width: 500px) {
-		grid-template-columns: 100px;
+		grid-template-columns: 1fr;
 		grid-template-rows: 1fr;
 	}
 `;
@@ -104,8 +109,6 @@ export const CardTop = styled.div`
 `;
 
 export const Info = styled.div`
-	min-width: 300px;
-
 	margin: 0 auto;
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -116,20 +119,21 @@ export const Info = styled.div`
 	justify-content: space-between;
 	background-color: #eff17987;
 	@media (max-width: 500px) {
-		grid-row: 3/3;
-		grid-column: 1/1;
+		grid-row: 1/1;
+		grid-column: 2/2;
 	}
 `;
 
 export const CardButton = styled.button`
 	margin: 1rem 0;
-	min-width: 2rem;
+	width: 100px;
 	height: 2rem;
 	background-color: #216bacc0;
-
 	display: inline-block;
+	grid-column: 3/3;
 	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
 	border: 0;
+	grid-row: 2/2;
 	border-radius: 12px;
 	color: #ffffff;
 	cursor: pointer;
@@ -173,13 +177,4 @@ export const NumberBox = styled.div`
 	flex-direction: row;
 
 	background-color: #5f5f3f86;
-`;
-
-export const CheckoutContainer = styled.div`
-	grid-column: 2/2;
-	width: 30%;
-	position: relative;
-	margin: 10% 0;
-	display: flex;
-	justify-content: center;
 `;

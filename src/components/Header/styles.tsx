@@ -12,30 +12,21 @@ export const Wrapper = styled.div`
 	min-height: 200px;
 	background-image: url(${header});
 	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: cover;
+
+	background-position: center;
 `;
 
 export const Links = styled.div`
-	width: 50%;
 	margin: 2% auto;
 	display: flex;
+	width: 700px;
 	list-style-type: none;
 	text-decoration: none;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	font-size: 0.8rem;
-`;
-
-export const Button = styled.button`
-	color: black;
-	font-size: 1em;
-	margin: 0;
-	max-width: 50px;
-
-	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
-	border-radius: 3px;
 `;
 
 export const Container = styled.div`
@@ -69,34 +60,6 @@ export const CartButton = styled.button`
 	&:active {
 		box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
 			0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
-	}
-`;
-
-export const CheckOutButtonStyled = styled.button`
-	border: none;
-	margin: 3rem;
-	cursor: pointer;
-	height: 2rem;
-	border-radius: 20px;
-	font-weight: 600;
-	line-height: 20%;
-	outline: transparent;
-	padding: 2%;
-
-	transition: box-shadow 0.2s ease-in-out;
-	color: #2c3e50;
-	background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
-	transition: all 0.25s ease;
-	z-index: 1;
-
-	font-size: 1.5em;
-
-	&:hover {
-		box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-	}
-
-	&:active {
-		scale: 80%;
 	}
 `;
 

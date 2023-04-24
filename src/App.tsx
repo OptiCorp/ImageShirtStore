@@ -8,22 +8,21 @@ import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './Pages/Login/Login';
 import { About } from './Pages/About/About';
-import { Cart } from './components/Cart/CartItems';
+import { CartItems } from './components/Cart/CartItems';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CartPreview from './components/Cart/CartPreview/CartPreview';
 function App(): JSX.Element {
 	return (
 		<div className='App'>
 			<section className='gridheader'>
-				<Header viewCart={false} />
+				<Header />
 			</section>
 			<section className='gridpages'>
 				<Routes>
 					<Route path='/' element={<Home />} />
 
 					<Route path='Shop' element={<Shop />} />
-					<Route path='CartItems' element={<Cart viewCart={false} />} />
+					<Route path='CartItems' element={<CartItems />} />
 					<Route path='About' element={<About />} />
 					<Route path='Login' element={<Login />} />
 					<Route path='*' element={<Navigate to='/' replace />} />

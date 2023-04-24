@@ -3,52 +3,54 @@ import { useAppSelector } from '../../../hooks/hooks';
 import React, { FunctionComponent, useState, useEffect, ReactNode } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem } from '../cartSlice';
-
+import { Dialog } from '@equinor/eds-core-react';
 import {
 	ModalBox,
-	Modaloverlay,
-	CloseButtonStyled,
 	StyledProductPreview,
 	CardPreview,
 	NumbermodalCart,
 	CardButton,
+	DialogCartPopup,
+	CheckOutButtonStyled,
 } from './styles';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Link, useNavigate, Route } from 'react-router-dom';
+import { CartItems } from '../CartItems';
 
 interface ModalType {
 	children?: ReactNode;
 	isOpen: boolean;
 	toggle: () => void;
 }
+export const CartPreview: FunctionComponent<ModalType> = ({ toggle, isOpen }) => {
+	let navigate = useNavigate();
 
-export default function CartPreview(props: ModalType) {
 	const dispatch = useDispatch();
 	const cart = useAppSelector(state => state.reducer.cart.items);
+	const leavePage = () => {
+		navigate('CartItems');
+	};
 
 	return (
 		<div>
-			{props.isOpen && (
-				<Modaloverlay onClick={props.toggle}>
-					<CloseButtonStyled onClick={props.toggle}>
-						<AiOutlineCloseCircle size={50} />
-					</CloseButtonStyled>
-					<ModalBox onClick={e => e.stopPropagation()}>
-						{cart.map(item => {
-							return (
-								<CardPreview key={item.imageId}>
-									<NumbermodalCart>{item.quantity}</NumbermodalCart>{' '}
-									<StyledProductPreview src={item.url} key={item.imageId} />
-									<CardButton onClick={() => dispatch(removeItem(item.imageId))}>
-										Remove
-									</CardButton>
-								</CardPreview>
-							);
-						})}
+			<DialogCartPopup isDismissable open={isOpen} onClose={toggle}>
+				<Dialog.Header>Cart</Dialog.Header>
 
-						{props.children}
-					</ModalBox>
-				</Modaloverlay>
-			)}
+				<ModalBox>
+					{cart.map(item => {
+						return (
+							<CardPreview key={item.imageId}>
+								<NumbermodalCart>{item.quantity}</NumbermodalCart>{' '}
+								<StyledProductPreview src={item.url} key={item.imageId} />
+								<CardButton onClick={() => dispatch(removeItem(item.imageId))}>
+									Remove
+								</CardButton>
+							</CardPreview>
+						);
+					})}
+					<CheckOutButtonStyled onClick={leavePage}>Checkout</CheckOutButtonStyled>{' '}
+				</ModalBox>
+			</DialogCartPopup>
 		</div>
 	);
-}
+};
