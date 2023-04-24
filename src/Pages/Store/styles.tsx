@@ -5,9 +5,7 @@ export const Box = styled.div`
 	max-height: 800px;
 	overflow-y: scroll;
 	overflow-x: hidden;
-
 	border: 2px solid grey;
-
 	min-width: 200px;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 	display: grid;
@@ -41,8 +39,5 @@ export const Wrapper = styled.div`
 
 export const Productbox = styled.div`
 	margin: 0 auto;
-
 	width: 100%;
-	cursor: pointer;
-	min-height: 150px;
 `;

@@ -93,33 +93,3 @@ export const IndexButton = styled.button`
 			0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 	}
 `;
-
-export const StyledToastContainer = styled(ToastContainer)`
-	&&&.Toastify__toast--success {
-		cursor: inherit;
-		font-family: 'Circular';
-		background: pink;
-		box-shadow: none;
-		padding: 0;
-		border-radius: 20px;
-		margin-bottom: 0.75em;
-		min-height: 0px;
-
-		.Toastify__toast {
-			cursor: inherit;
-			font-family: 'Circular';
-			background: rgba(255, 255, 255, 0);
-			box-shadow: none;
-			padding: 0;
-			margin-bottom: 0.75em;
-			min-height: 10px;
-		}
-		.Toastify__toast-body {
-			padding: 0;
-			margin: 20;
-		}
-		.toastProgress {
-			background: #848dde !important;
-		}
-	}
-`;

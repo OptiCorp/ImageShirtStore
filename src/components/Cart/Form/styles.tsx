@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { Dialog } from '@equinor/eds-core-react';
+import CheckoutImage from '../../../images/checkout.svg';
 
 export const FormWrapper = styled.div`
-	margin: 3rem 0;
+	margin: 0;
 	width: 80%;
 
 	grid-column: 2/2;
+
 	border-radius: 20px;
-	background-color: coral;
+
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 	box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
@@ -19,9 +21,27 @@ export const FormWrapper = styled.div`
 	}
 `;
 
+export const Topcontainer = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 7.4rem 1fr;
+	align-items: baseline;
+`;
+
+export const ImageCheckout = styled.div`
+	width: 100%;
+	background-position: center;
+	grid-column: span 2;
+	background-image: url(${CheckoutImage});
+	background-size: 100%;
+	background-repeat: no-repeat;
+	margin: 5% 0;
+`;
+
 export const Summary = styled.div`
-	padding: 1%;
-	width: 500px;
+	width: 200px;
+	padding: 2%;
+	grid-column: 1/1;
 
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
@@ -42,11 +62,12 @@ export const FormStyle = styled.form`
 export const StyledInput = styled.input`
 	width: 100%;
 	min-height: 25px;
+
 	border: 0;
 	box-shadow: rgba(167, 157, 124, 0.25) 0px 30px 60px -12px inset,
 		rgba(83, 77, 64, 0.577) 0px 18px 36px -18px inset;
 	min-width: 30%;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	letter-spacing: 0.15rem;
 	box-sizing: border-box;
 	padding: 8px;
@@ -56,18 +77,19 @@ export const StyledInput = styled.input`
 
 export const StyledLabel = styled.label`
 	text-transform: uppercase;
-	font-size: 16px;
+	font-size: 10px;
+
 	letter-spacing: 2px;
 	color: $maroon;
 `;
 
 export const SubmitInput = styled.input`
 	margin: 0 auto;
-	height: 3rem;
+	height: 2rem;
 	cursor: pointer;
 	grid-column: 2/2;
 	grid-row: 3/3;
-	width: 80%;
+
 	color: #cfc9e1;
 	background-color: #4a3b76;
 	text-transform: uppercase;
@@ -84,13 +106,20 @@ export const SubmitInput = styled.input`
 		animation-fill-mode: forwards;
 		scale: 90%;
 	}
+	@media (max-width: 500px) {
+		grid-row: 2/2;
+		grid-column: 2/2;
+	}
 `;
 
 export const Number = styled.p`
-	font-size: 30px;
+	font-size: 0.9rem;
 	font-weight: 600;
-	line-height: 42px;
+
+	line-height: 20px;
 	margin: 0 auto;
+	text-align: center;
+	font-family: 'Grandstander';
 	color: #000000;
 `;
 
@@ -123,16 +152,14 @@ export const CartButton = styled.button`
 export const SpanFieldContainer = styled.span`
 	display: grid;
 	grid-template-columns: min(50%) 40% 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-rows: 1fr max(200px) 10px;
 	align-items: center;
 	border-radius: 20px;
 	justify-items: center;
 	grid-gap: 20px;
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto;
-
-		grid-gap: 20px;
+		grid-template-rows: min(30%) 60%;
 	}
 `;
 
@@ -144,6 +171,11 @@ export const SpanField1 = styled.span`
 	width: 100%;
 	border-radius: 1rem;
 	color: #000000;
+	@media (max-width: 500px) {
+		width: 100%;
+		grid-column: 1/1;
+		grid-row: 1/1;
+	}
 `;
 
 export const SpanField2 = styled.span`
@@ -153,6 +185,9 @@ export const SpanField2 = styled.span`
 	grid-row: 2/2;
 	border-radius: 1rem;
 	color: #000000;
+	@media (max-width: 500px) {
+		grid-row: 1/1;
+	}
 `;
 
 export const SpanField3 = styled.span`
@@ -161,16 +196,11 @@ export const SpanField3 = styled.span`
 	border-radius: 1rem;
 	grid-row: 2/2;
 	grid-column: 2/2;
-	width: 50%;
+	width: 100%;
+	background-color: #c4c2c0ca;
 
 	color: #000000;
-`;
-
-export const SpanField4 = styled.span`
-	border: 1px solid grey;
-	padding: 0.5rem;
-	grid-row: 3/3;
-	grid-column: 1/1;
-
-	border-radius: 1rem;
+	@media (max-width: 500px) {
+		grid-column: 1/1;
+	}
 `;

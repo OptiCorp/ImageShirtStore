@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { useAppSelector } from '../../../hooks/hooks';
 import React, { FunctionComponent, useState, useEffect, ReactNode } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +12,7 @@ import {
 	DialogCartPopup,
 	CheckOutButtonStyled,
 } from './styles';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+
 import { Link, useNavigate, Route } from 'react-router-dom';
 import { CartItems } from '../CartItems';
 

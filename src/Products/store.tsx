@@ -40,9 +40,6 @@ export const store = configureStore({
 			},
 		}),
 });
-// nekoImageSlice: nekoSlice.reducer,
-// shop: shopSlice.reducer,
-// cart: cartSlice.reducer,
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch: () => typeof store.dispatch = useDispatch;

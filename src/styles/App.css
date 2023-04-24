@@ -11,7 +11,7 @@
   margin: 0;
   display: grid;
 
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: min(195px) 1fr 1fr;
 
   min-height: 100%;
 

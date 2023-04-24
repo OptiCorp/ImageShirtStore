@@ -5,10 +5,11 @@ import Shirt from '../../images/36634-6-blank-white-t-shirt-template.png';
 export const CartBox = styled.div`
 	width: 100%;
 	min-width: 500px;
-	background-color: #ffdfdf;
+
 	margin: 0 auto;
-	background-image: url(${Texture});
-	background-size: cover;
+
+	background-color: #d3cfcf;
+
 	min-height: 900px;
 	max-height: 300px;
 	background-repeat: no-repeat;
@@ -17,7 +18,7 @@ export const CartBox = styled.div`
 	grid-row: 1/1;
 	@media (max-width: 500px) {
 		min-height: 200px;
-		max-height: 400px;
+		max-height: 300px;
 	}
 `;
 
@@ -41,15 +42,14 @@ export const ContainerCart = styled.div`
 
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
-		grid-template-rows: min(400px) min(300px) min(400px);
+		grid-template-rows: min(300px) min(300px) min(400px);
 		min-height: 100vh;
 		grid-gap: 0px;
 	}
 `;
 
 export const CartItemContainer = styled.div`
-	margin: 0 10%;
-
+	margin: 0;
 	padding: 2rem;
 	width: 30rem;
 `;
@@ -112,7 +112,7 @@ export const Info = styled.div`
 	margin: 0 auto;
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-	padding: 30%;
+	padding: 20%;
 	display: flex;
 	flex-direction: column;
 	grid-column: 2/2;

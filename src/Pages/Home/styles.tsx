@@ -50,18 +50,14 @@ export const Back = styled.div`
 	background-image: url(${Texture});
 	background-size: 100%;
 	background-repeat: no-repeat;
-
 	padding-bottom: 3%;
-
-	margin: 50px 0;
+	margin: 0 auto;
 `;
 
 export const Cover = styled.div`
-	grid-template-columns: 1fr 1fr;
-
 	width: 100%;
-
-	display: grid;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const Back2 = styled.div`
@@ -70,7 +66,6 @@ export const Back2 = styled.div`
 	background-size: cover;
 	background-position: center;
 	grid-column: span 2;
-	margin: 0;
 	width: 100%;
 	margin: 0;
 
@@ -85,13 +80,14 @@ export const MenuWrapper = styled.div`
 	border: 10px solid orange;
 	background-repeat: no-repeat;
 	background-color: #dee2e7;
-	margin: 0 auto;
+	margin: 50px auto;
 	width: 90%;
 	grid-row: 2/2;
 	box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
 	border-radius: 0.25rem;
 	display: flex;
 	flex-direction: row;
+	grid-column: 1/1;
 	justify-content: space-around;
 	border: 2px solid white;
 	border-radius: 20px;
@@ -102,7 +98,7 @@ export const Card = styled.div`
 	position: relative;
 	border-radius: 30px;
 	box-shadow: 0 2px 7px #dfdfdf;
-	margin: 2rem 0;
+	margin: 2% 0;
 	background: #fafafa;
 `;
 

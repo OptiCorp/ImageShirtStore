@@ -6,9 +6,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Accordion } from '@equinor/eds-core-react';
 import { clearCart } from '../cartSlice';
 
-import { Dialog } from '@equinor/eds-core-react';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-
 import {
 	Summary,
 	FormWrapper,
@@ -21,7 +18,8 @@ import {
 	SpanField1,
 	SpanField2,
 	SpanField3,
-	SpanField4,
+	ImageCheckout,
+	Topcontainer,
 } from './styles';
 
 import { HeaderAcc, PanelAcc } from './Accordionstyles';
@@ -74,20 +72,27 @@ export const Form: FunctionComponent<ModalForm> = () => {
 
 	return (
 		<FormWrapper>
-			<button
-				onClick={() => toggleAccordion(!expanded)}
-				style={{ width: 'fit-content' }}
-			></button>
 			<Accordion>
 				<Accordion.Item isExpanded={expanded} onExpandedChange={toggleAccordion}>
-					<HeaderAcc>Checkout</HeaderAcc>
+					<ImageCheckout>
+						<Topcontainer>
+							<HeaderAcc
+								onClick={() => toggleAccordion(!expanded)}
+								style={{ width: 'fit-content' }}
+							>
+								Checkout
+							</HeaderAcc>
+
+							<Summary>
+								<Number>
+									total ({getTotal().totalQuantity} items) :{' '}
+									<strong>${getTotal().totalPrice}</strong>
+								</Number>
+							</Summary>
+						</Topcontainer>
+					</ImageCheckout>
+
 					<PanelAcc>
-						<Summary>
-							<Number>
-								total ({getTotal().totalQuantity} items) :{' '}
-								<strong>${getTotal().totalPrice}</strong>
-							</Number>
-						</Summary>
 						<FormStyle onSubmit={onSubmit}>
 							<SpanFieldContainer>
 								<SpanField1>
@@ -113,14 +118,6 @@ export const Form: FunctionComponent<ModalForm> = () => {
 									<StyledLabel>Country</StyledLabel>
 									<StyledInput {...register('country')} />
 								</SpanField3>
-								<SpanField4>
-									<StyledLabel>Credit Card information</StyledLabel>
-									<StyledInput type='password' {...register('password')} />
-									<StyledLabel>EXP</StyledLabel>
-									<StyledInput type='password' {...register('password')} />
-									<StyledLabel>CCV</StyledLabel>
-									<StyledInput type='password' {...register('password')} />
-								</SpanField4>{' '}
 								<SubmitInput type='submit' onClick={() => dispatch(clearCart())} />{' '}
 							</SpanFieldContainer>
 						</FormStyle>

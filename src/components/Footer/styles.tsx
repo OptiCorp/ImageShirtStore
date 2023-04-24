@@ -8,7 +8,7 @@ export const WrapperFooter = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	color: white;
-	height: 140px;
+	height: 130px;
 	list-style: none;
 	color: white;
 	background-color: #4f85b5;
