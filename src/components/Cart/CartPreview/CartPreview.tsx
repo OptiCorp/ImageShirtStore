@@ -25,23 +25,28 @@ export const CartPreview: FunctionComponent<ModalType> = ({ toggle, isOpen }) =>
 	let navigate = useNavigate();
 
 	const dispatch = useDispatch();
-	const cart = useAppSelector(state => state.reducer.cart.items);
+	const { items } = useAppSelector(state => state.cart);
 	const leavePage = () => {
 		navigate('CartItems');
 	};
-
+	console.log(items);
 	return (
 		<div>
 			<DialogCartPopup isDismissable open={isOpen} onClose={toggle}>
 				<Dialog.Header>Cart</Dialog.Header>
 
 				<ModalBox>
-					{cart.map(item => {
+					{items.map(item => {
 						return (
-							<CardPreview key={item.imageId}>
+							<CardPreview key={item.image.url}>
 								<NumbermodalCart>{item.quantity}</NumbermodalCart>{' '}
-								<StyledProductPreview src={item.url} key={item.imageId} />
-								<CardButton onClick={() => dispatch(removeItem(item.imageId))}>
+								<StyledProductPreview
+									src={item.image.url}
+									key={item.image.imageId}
+								/>
+								<CardButton
+									onClick={() => dispatch(removeItem(item.image.imageId))}
+								>
 									Remove
 								</CardButton>
 							</CardPreview>

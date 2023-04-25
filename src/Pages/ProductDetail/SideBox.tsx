@@ -10,7 +10,7 @@ import {
 } from './styles';
 import { JsonNekoImage } from '../../Products/imageSlice';
 
-import { addToCart } from '../../components/Cart/cartSlice';
+import { CartItem, addItemToCart } from '../../components/Cart/cartSlice';
 
 import { useDispatch } from 'react-redux';
 
@@ -18,16 +18,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
-	items: JsonNekoImage[];
-	selectedNeko: JsonNekoImage;
+	items: CartItem[];
+	selectedNeko: JsonNekoImage | null;
 	id: number;
 }
 
 const SideBox: FunctionComponent<Props> = ({ selectedNeko, items, id }) => {
 	const dispatch = useDispatch();
 
-	const handleToCart = (item: JsonNekoImage) => {
-		dispatch(addToCart(item));
+	const handleToCart = (item: JsonNekoImage | null) => {
+		if (item === null) return;
+		dispatch(addItemToCart(item));
 		toast.success('t shirt added');
 	};
 	return (

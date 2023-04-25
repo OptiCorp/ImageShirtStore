@@ -2,75 +2,111 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JsonNekoImage } from '../../Products/imageSlice';
 import { RootState } from '../../Products/store';
 
-export interface CartState {
-	items: JsonNekoImage[];
-	cartTotalAmount: number;
-	cartTotalQuanitity: number;
-	id: string;
+export interface CartItem {
+	image: JsonNekoImage;
 	quantity: number;
+	price: number;
+}
+
+interface CartState {
+	items: CartItem[];
+	totalPrice: number;
+	totalQuantity: number;
 	hasItems: boolean;
 }
 
-const initialState: CartState = {
-	items: [],
-	cartTotalAmount: 0,
-	cartTotalQuanitity: 0,
-	id: '',
-	quantity: 0,
-	hasItems: false,
+const getInitialState = (): CartState => {
+	const localStore = localStorage.getItem('cart');
+	if (localStore) return JSON.parse(localStore);
+	return {
+		items: [],
+		totalPrice: 0,
+		totalQuantity: 0,
+		hasItems: false,
+	};
 };
 
 export const cartSlice = createSlice({
 	name: 'cart',
-	initialState,
+	initialState: getInitialState(),
 
 	reducers: {
-		addToCart(state, action: PayloadAction<JsonNekoImage>) {
-			// state.items.push(action.payload, quantity: 1 );
-
-			const itemInCart = state.items.find(item => item.imageId === action.payload.imageId);
+		addItemToCart(state, action: PayloadAction<JsonNekoImage>) {
+			const newItem = action.payload;
+			const existingItem = state.items.find(item => item.image.imageId === newItem.imageId);
+			state.totalQuantity++;
 			state.hasItems = true;
-			if (itemInCart) {
-				itemInCart.quantity++;
+			if (!existingItem) {
+				state.items.push({
+					image: newItem,
+					quantity: 1,
+					price: newItem.price,
+				});
 			} else {
-				state.items.push({ ...action.payload, quantity: 1 });
+				state.items = state.items.map(item => {
+					if (item.image.imageId !== newItem.imageId) return item;
+					item.quantity += 1;
+					return item;
+				});
+				existingItem.quantity += action.payload.quantity;
 			}
-			// const itemInCart = state.items.find(item => item.imageId === action.payload.imageId);
-			// state.hasItems = true;
-			// if (itemInCart) {
-			// 	itemInCart.quantity++;
-			// } else {
-			// 	state.items.push({ ...action.payload, quantity: 1 });
-			// }
+			state.totalPrice = state.items.reduce((acc, cur) => {
+				return acc + cur.price;
+			}, 0);
+			localStorage.setItem('cart', JSON.stringify(state));
 		},
-		removeItem: (state, action) => {
-			const index = state.items.findIndex(item => item.imageId === action.payload);
-			if (index !== -1) {
-				state.items.splice(index, 1);
-				state.hasItems = state.items.length > 0;
-			}
-			// const removeItem = state.items.filter(item => item.imageId !== action.payload);
-			// state.items = removeItem;
+		removeItem: (state, action: PayloadAction<string>) => {
+			const removedItem = state.items.find(item => item.image.imageId === action.payload);
+
+			if (removedItem) state.totalQuantity - removedItem.quantity;
+			state.items = state.items.filter(item => item.image.imageId !== action.payload);
+			state.hasItems = state.items.length > 0;
+			localStorage.setItem('cart', JSON.stringify(state));
 		},
 
-		// 	state.items = state.items.filter(item => item.imageId !== action.payload.imageId);
-
-		incrementQuantity: (state, action) => {
-			const item = state.items.find(item => item.imageId === action.payload);
-			item.quantity++;
+		incrementQuantity: (state, action: PayloadAction<string>) => {
+			state.totalQuantity++;
+			state.items.map(item => {
+				if (item.image.imageId !== action.payload) return item;
+				item.quantity = item.quantity + 1;
+				return item;
+			});
+			localStorage.setItem('cart', JSON.stringify(state));
 		},
-		decrementQuantity: (state, action) => {
-			const item = state.items.find(item => item.imageId === action.payload);
-
-			if (item.quantity === 1) {
-				item.quantity = 1;
-			} else {
-				item.quantity--;
+		decrementQuantity: (state, action: PayloadAction<string>) => {
+			state.totalQuantity--;
+			const selectedItem = state.items.find(item => item.image.imageId === action.payload);
+			if (selectedItem && selectedItem.quantity <= 0) {
+				state.items = state.items.filter(item => item.image.imageId !== action.payload);
+				return;
 			}
+			state.items.map(item => {
+				if (item.image.imageId !== action.payload) return item;
+				item.quantity = item.quantity - 1;
+				return item;
+			});
+			localStorage.setItem('cart', JSON.stringify(state));
 		},
 		clearCart: state => {
 			state.items = [];
+			localStorage.setItem('cart', JSON.stringify(state));
 		},
+
+		// cartTotalQuanitity: (state, action: { payload: number }) => {
+		// 	let total = 0;
+		// 	state.items.forEach(item => {
+		// 		total += item.quantity;
+		// 	});
+		// 	return total;
+		// },
+		// totalAmount: (state, action: { payload: number }) => {
+		// 	let totalQuantity = 0;
+		// 	state.cartTotalAmount = action.payload;
+		// 	state.items.forEach(item => {
+		// 		totalQuantity += item.quantity;
+		// 		cartTotalAmount += item.price * item.quantity;
+		// 	});
+		// 	return { totalPrice, totalQuantity };
 	},
 });
 
@@ -83,7 +119,7 @@ export const cartSlice = createSlice({
 // }
 
 export default cartSlice.reducer;
-export const { addToCart, removeItem, incrementQuantity, decrementQuantity, clearCart } =
+export const { addItemToCart, removeItem, incrementQuantity, decrementQuantity, clearCart } =
 	cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

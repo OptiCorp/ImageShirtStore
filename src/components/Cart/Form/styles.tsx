@@ -159,7 +159,7 @@ export const SpanFieldContainer = styled.span`
 	grid-gap: 20px;
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: min(30%) 60%;
+		grid-template-rows: min(50%) 60%;
 	}
 `;
 

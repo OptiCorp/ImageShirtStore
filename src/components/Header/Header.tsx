@@ -13,15 +13,8 @@ type THeader = {};
 
 const Header: FunctionComponent<THeader> = () => {
 	const dispatch = useDispatch();
-	const cart = useAppSelector(state => state.reducer.cart.items);
+	const { items, totalQuantity } = useAppSelector(state => state.cart);
 	const [isOpen, setIsOpen] = useState(false);
-	const getTotalQuantity = () => {
-		let total = 0;
-		cart.forEach(item => {
-			total += item.quantity;
-		});
-		return total;
-	};
 
 	return (
 		<Wrapper>
@@ -46,7 +39,7 @@ const Header: FunctionComponent<THeader> = () => {
 					</Link>
 					<CartButton onClick={() => setIsOpen(prev => !prev)}>
 						<NumberItems>
-							<CounterNumber>{getTotalQuantity() || 0}</CounterNumber>
+							<CounterNumber>{totalQuantity || 0}</CounterNumber>
 						</NumberItems>{' '}
 						<FiShoppingCart />
 					</CartButton>

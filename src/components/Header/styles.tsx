@@ -24,12 +24,13 @@ export const BackgroundBanner = styled.div`
 export const Links = styled.div`
 	margin: 0;
 	width: 100%;
-
+	text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.4);
 	display: inline-flex;
+	padding-top: 30px;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
-	font-size: 0.8rem;
+	font-size: 1rem;
 `;
 
 export const CartButton = styled.button`

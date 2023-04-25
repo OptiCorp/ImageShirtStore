@@ -14,15 +14,13 @@ import { useAppSelector } from '../../hooks/hooks';
 const Shop = () => {
 	const dispatch = useDispatch();
 
-	// const [neko, setNeko] = useState<JsonNekoImage | null>(null);
-
-	const items = useAppSelector(state => state.reducer.cart.items);
-	const imageId = useAppSelector(state => state.reducer.nekoImageSlice.imageId);
-	const selectedNeko = useAppSelector(state => state.reducer.shop.selectedNeko);
+	const items = useAppSelector(state => state.cart.items);
+	const imageId = useAppSelector(state => state.nekoImageSlice.imageId);
+	const selectedNeko = useAppSelector(state => state.shop.selectedNeko);
 
 	return (
 		<Wrapper>
-			<SideBox item={items} id={imageId} selectedNeko={selectedNeko} />
+			<SideBox items={items} id={imageId} selectedNeko={selectedNeko} />
 
 			<Box>
 				<Productbox>

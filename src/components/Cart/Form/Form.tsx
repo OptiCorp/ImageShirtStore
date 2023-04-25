@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { FunctionComponent, useState, useEffect } from 'react';
 import { useAppSelector } from '../../../hooks/hooks';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, FormState } from 'react-hook-form';
 import { Accordion } from '@equinor/eds-core-react';
 import { clearCart } from '../cartSlice';
 
@@ -24,26 +25,6 @@ import {
 
 import { HeaderAcc, PanelAcc } from './Accordionstyles';
 
-export const getTotal = () => {
-	const cart = useAppSelector(state => state.reducer.cart.items);
-	let totalQuantity = 0;
-	let totalPrice = 0;
-	cart.forEach(item => {
-		totalQuantity += item.quantity;
-		totalPrice += item.price * item.quantity;
-	});
-	return { totalPrice, totalQuantity };
-};
-
-export const getTotalQuantity = () => {
-	const cart = useAppSelector(state => state.reducer.cart.items);
-	let total = 0;
-	cart.forEach(item => {
-		total += item.quantity;
-	});
-	return total;
-};
-
 interface ModalForm {
 	expanded: boolean;
 }
@@ -61,14 +42,19 @@ type FormValues = {
 
 export const Form: FunctionComponent<ModalForm> = () => {
 	const dispatch = useDispatch();
-
-	const { register, handleSubmit, reset } = useForm<FormValues>();
+	const { totalPrice, totalQuantity } = useAppSelector(state => state.cart);
+	const { register, handleSubmit, reset, formState } = useForm<FormValues>();
 	const onSubmit = handleSubmit((data: FormValues) => console.log(data));
-	const [expanded, setExpanded] = useState(false);
+	const [expanded, setExpanded] = useState(true);
 	const toggleAccordion = (state: boolean) => {
 		console.log(state);
 		setExpanded(state);
 	};
+	useEffect(() => {
+		if (formState.isSubmitSuccessful) {
+			reset();
+		}
+	});
 
 	return (
 		<FormWrapper>
@@ -76,20 +62,18 @@ export const Form: FunctionComponent<ModalForm> = () => {
 				<Accordion.Item isExpanded={expanded} onExpandedChange={toggleAccordion}>
 					<ImageCheckout>
 						<Topcontainer>
-							<HeaderAcc
-								onClick={() => toggleAccordion(!expanded)}
-								style={{ width: 'fit-content' }}
-							>
-								Checkout
-							</HeaderAcc>
-
 							<Summary>
 								<Number>
-									total ({getTotal().totalQuantity} items) :{' '}
-									<strong>${getTotal().totalPrice}</strong>
+									total ({totalQuantity} items) : <strong>${totalPrice}</strong>
 								</Number>
 							</Summary>
 						</Topcontainer>
+						<HeaderAcc
+							onClick={() => toggleAccordion(!expanded)}
+							style={{ width: 'fit-content' }}
+						>
+							Checkout
+						</HeaderAcc>
 					</ImageCheckout>
 
 					<PanelAcc>

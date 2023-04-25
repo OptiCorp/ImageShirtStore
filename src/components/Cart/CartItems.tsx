@@ -27,8 +27,7 @@ type TCart = {};
 
 export const CartItems: FunctionComponent<TCart> = () => {
 	const dispatch = useDispatch();
-	const cart = useAppSelector(state => state.reducer.cart.items);
-	// const [isOpen, setIsOpen] = useState(false);
+	const cart = useAppSelector(state => state.cart.items);
 
 	return (
 		<div>
@@ -42,10 +41,10 @@ export const CartItems: FunctionComponent<TCart> = () => {
 						<>
 							{cart.map(item => {
 								return (
-									<CartItemContainer key={item.imageId}>
+									<CartItemContainer key={item.image.imageId}>
 										<CardMain>
 											<Tshirt>
-												<StyledCartItem src={item.url} />
+												<StyledCartItem src={item.image.url} />
 											</Tshirt>
 											<Info>
 												<Title>T shirt</Title>
@@ -53,7 +52,7 @@ export const CartItems: FunctionComponent<TCart> = () => {
 
 												<CardButton
 													onClick={() =>
-														dispatch(removeItem(item.imageId))
+														dispatch(removeItem(item.image.imageId))
 													}
 												>
 													Remove
@@ -63,7 +62,9 @@ export const CartItems: FunctionComponent<TCart> = () => {
 														size={30}
 														onClick={() =>
 															dispatch(
-																decrementQuantity(item.imageId)
+																decrementQuantity(
+																	item.image.imageId
+																)
 															)
 														}
 													/>
@@ -72,7 +73,9 @@ export const CartItems: FunctionComponent<TCart> = () => {
 														size={30}
 														onClick={() =>
 															dispatch(
-																incrementQuantity(item.imageId)
+																incrementQuantity(
+																	item.image.imageId
+																)
 															)
 														}
 													/>

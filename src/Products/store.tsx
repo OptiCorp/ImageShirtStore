@@ -16,32 +16,15 @@ import {
 } from 'redux-persist';
 import { cartReducer } from '../components/Cart/cartSlice';
 
-const persistConfig = {
-	key: 'root',
-	storage,
-};
-
-const reducers = combineReducers({
-	cart: cartReducer,
-	nekoImageSlice: NekoReducer,
-	shop: ShopReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, reducers);
-
 export const store = configureStore({
 	reducer: {
-		reducer: persistedReducer,
+		cart: cartReducer,
+		nekoImageSlice: NekoReducer,
+		shop: ShopReducer,
 	},
-	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware({
-			serializableCheck: {
-				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-			},
-		}),
 });
 
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch: () => typeof store.dispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export const persistor = persistStore(store);

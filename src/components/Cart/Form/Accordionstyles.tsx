@@ -12,7 +12,7 @@ export const HeaderAcc = styled(Accordion.Header)`
 export const PanelAcc = styled(Accordion.Panel)`
 	margin: 0;
 	width: 100%;
-	max-width: 30rem;
+	max-width: 40rem;
 	border-radius: 20px;
 
 	border-radius: 20px;

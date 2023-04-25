@@ -20,8 +20,10 @@ export const NekoImages = (props: NekoProps) => {
 	const [selectedNeko, setSelectedNeko] = useState<JsonNekoImage | null>(null);
 
 	const { images, isLoading, error, pageIndex, pageCount, nekoCategory } = useAppSelector(
-		state => state.reducer.nekoImageSlice
+		state => state.nekoImageSlice
 	);
+
+	console.log(images);
 
 	// event handler with the image that goes to the t shirt
 	const { onSelectedNeko } = props;
@@ -44,7 +46,7 @@ export const NekoImages = (props: NekoProps) => {
 	}
 
 	if (error) {
-		return <p>Error: {error.message}</p>;
+		return <p>Error: {error}</p>;
 	}
 
 	return (
@@ -91,6 +93,7 @@ export const NekoImages = (props: NekoProps) => {
 // fetches the amount of images(categories), calls forth/distpatches actions/states from slice
 
 async function loadNekoCategory(type: string, dispatch: Dispatch) {
+	console.log('test');
 	dispatch(nekoSlice.actions.getNekoCategoryStart());
 
 	try {
