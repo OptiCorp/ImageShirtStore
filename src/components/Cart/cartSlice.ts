@@ -2,6 +2,8 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JsonNekoImage } from '../../Products/imageSlice';
 import { RootState } from '../../Products/store';
 
+import { toast } from 'react-toastify';
+
 export interface CartItem {
 	image: JsonNekoImage;
 	quantity: number;
@@ -12,7 +14,6 @@ interface CartState {
 	items: CartItem[];
 	totalPrice: number;
 	totalQuantity: number;
-	hasItems: boolean;
 }
 
 const getInitialState = (): CartState => {
@@ -22,7 +23,6 @@ const getInitialState = (): CartState => {
 		items: [],
 		totalPrice: 0,
 		totalQuantity: 0,
-		hasItems: false,
 	};
 };
 
@@ -31,11 +31,12 @@ export const cartSlice = createSlice({
 	initialState: getInitialState(),
 
 	reducers: {
+		//additem
 		addItemToCart(state, action: PayloadAction<JsonNekoImage>) {
 			const newItem = action.payload;
 			const existingItem = state.items.find(item => item.image.imageId === newItem.imageId);
 			state.totalQuantity++;
-			state.hasItems = true;
+
 			if (!existingItem) {
 				state.items.push({
 					image: newItem,
@@ -55,15 +56,22 @@ export const cartSlice = createSlice({
 			}, 0);
 			localStorage.setItem('cart', JSON.stringify(state));
 		},
+
+		// REMOVE
+
 		removeItem: (state, action: PayloadAction<string>) => {
 			const removedItem = state.items.find(item => item.image.imageId === action.payload);
 
 			if (removedItem) state.totalQuantity - removedItem.quantity;
 			state.items = state.items.filter(item => item.image.imageId !== action.payload);
-			state.hasItems = state.items.length > 0;
+			toast.warning('item removed', {
+				position: 'top-right',
+				theme: 'colored',
+			});
 			localStorage.setItem('cart', JSON.stringify(state));
 		},
 
+		//increase
 		incrementQuantity: (state, action: PayloadAction<string>) => {
 			state.totalQuantity++;
 			state.items.map(item => {
@@ -73,6 +81,8 @@ export const cartSlice = createSlice({
 			});
 			localStorage.setItem('cart', JSON.stringify(state));
 		},
+
+		//decrease
 		decrementQuantity: (state, action: PayloadAction<string>) => {
 			state.totalQuantity--;
 			const selectedItem = state.items.find(item => item.image.imageId === action.payload);
@@ -87,36 +97,14 @@ export const cartSlice = createSlice({
 			});
 			localStorage.setItem('cart', JSON.stringify(state));
 		},
+
+		//clear cart
 		clearCart: state => {
 			state.items = [];
 			localStorage.setItem('cart', JSON.stringify(state));
 		},
-
-		// cartTotalQuanitity: (state, action: { payload: number }) => {
-		// 	let total = 0;
-		// 	state.items.forEach(item => {
-		// 		total += item.quantity;
-		// 	});
-		// 	return total;
-		// },
-		// totalAmount: (state, action: { payload: number }) => {
-		// 	let totalQuantity = 0;
-		// 	state.cartTotalAmount = action.payload;
-		// 	state.items.forEach(item => {
-		// 		totalQuantity += item.quantity;
-		// 		cartTotalAmount += item.price * item.quantity;
-		// 	});
-		// 	return { totalPrice, totalQuantity };
 	},
 });
-
-// export function getNumItems(state: RootState) {
-// 	let NumItems = 0;
-// 	for (const id in state.cart.items) {
-// 		NumItems += state.cart.id;
-// 	}
-// 	return parseInt(`${NumItems}`);
-// }
 
 export default cartSlice.reducer;
 export const { addItemToCart, removeItem, incrementQuantity, decrementQuantity, clearCart } =

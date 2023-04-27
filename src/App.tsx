@@ -10,10 +10,12 @@ import { Login } from './Pages/Login/Login';
 import { About } from './Pages/About/About';
 import { CartItems } from './components/Cart/CartItems';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App(): JSX.Element {
 	return (
 		<div className='App'>
+			<ToastContainer autoClose={2000} hideProgressBar={true} newestOnTop closeOnClick />
 			<section className='gridheader'>
 				<Header />
 			</section>

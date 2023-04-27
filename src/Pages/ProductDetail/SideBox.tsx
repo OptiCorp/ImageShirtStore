@@ -29,7 +29,10 @@ const SideBox: FunctionComponent<Props> = ({ selectedNeko, items, id }) => {
 	const handleToCart = (item: JsonNekoImage | null) => {
 		if (item === null) return;
 		dispatch(addItemToCart(item));
-		toast.success('t shirt added');
+		toast.success('t shirt added', {
+			theme: 'colored',
+			position: 'top-left',
+		});
 	};
 	return (
 		<SideBoxContainer>
@@ -47,12 +50,6 @@ const SideBox: FunctionComponent<Props> = ({ selectedNeko, items, id }) => {
 				<ListItem2>$20</ListItem2>
 				<ListItem2>Size options</ListItem2>
 			</List>
-			<ToastContainer
-				position='top-left'
-				autoClose={7000}
-				progressClassName='toastProgress'
-				bodyClassName='toastBody'
-			/>
 		</SideBoxContainer>
 	);
 };

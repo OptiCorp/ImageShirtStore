@@ -61,13 +61,11 @@ export const Form: FunctionComponent<ModalForm> = () => {
 			<Accordion>
 				<Accordion.Item isExpanded={expanded} onExpandedChange={toggleAccordion}>
 					<ImageCheckout>
-						<Topcontainer>
-							<Summary>
-								<Number>
-									total ({totalQuantity} items) : <strong>${totalPrice}</strong>
-								</Number>
-							</Summary>
-						</Topcontainer>
+						<Summary>
+							<Number>
+								total ({totalQuantity} items) : ${totalPrice}
+							</Number>
+						</Summary>{' '}
 						<HeaderAcc
 							onClick={() => toggleAccordion(!expanded)}
 							style={{ width: 'fit-content' }}

@@ -4,7 +4,7 @@ import CheckoutImage from '../../../images/checkout.svg';
 
 export const FormWrapper = styled.div`
 	margin: 0;
-	width: 80%;
+	width: 100%;
 
 	grid-column: 2/2;
 
@@ -21,28 +21,28 @@ export const FormWrapper = styled.div`
 	}
 `;
 
-export const Topcontainer = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 7.4rem 1fr;
-	align-items: baseline;
-`;
+export const Topcontainer = styled.div``;
 
 export const ImageCheckout = styled.div`
 	width: 100%;
-	background-position: center;
-	grid-column: span 2;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	background-position: center center;
+	padding: 1rem;
+	align-items: center;
 	background-image: url(${CheckoutImage});
-	background-size: 100%;
+	background-size: cover;
 	background-repeat: no-repeat;
 	margin: 5% 0;
 `;
 
 export const Summary = styled.div`
-	width: 200px;
-	padding: 2%;
-	grid-column: 1/1;
-
+	padding: 10px;
+	margin: 0 auto;
+	grid-column: 2/2;
+	grid-row: 2/2;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
 		rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
@@ -56,12 +56,13 @@ export const Summary = styled.div`
 export const FormStyle = styled.form`
 	padding: 20px;
 	width: 100%;
+	max-width: 500px;
 	border-radius: 5px;
 `;
 
 export const StyledInput = styled.input`
 	width: 100%;
-	min-height: 25px;
+	min-height: 15px;
 
 	border: 0;
 	box-shadow: rgba(167, 157, 124, 0.25) 0px 30px 60px -12px inset,
@@ -89,7 +90,7 @@ export const SubmitInput = styled.input`
 	cursor: pointer;
 	grid-column: 2/2;
 	grid-row: 3/3;
-
+	width: 100%;
 	color: #cfc9e1;
 	background-color: #4a3b76;
 	text-transform: uppercase;
@@ -113,10 +114,9 @@ export const SubmitInput = styled.input`
 `;
 
 export const Number = styled.p`
-	font-size: 0.9rem;
+	font-size: 1.2rem;
 	font-weight: 600;
 
-	line-height: 20px;
 	margin: 0 auto;
 	text-align: center;
 	font-family: 'Grandstander';
@@ -151,15 +151,15 @@ export const CartButton = styled.button`
 
 export const SpanFieldContainer = styled.span`
 	display: grid;
-	grid-template-columns: min(50%) 40% 1fr;
+	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr max(200px) 10px;
 	align-items: center;
 	border-radius: 20px;
 	justify-items: center;
-	grid-gap: 20px;
+	grid-gap: 30px;
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: min(50%) 60%;
+		grid-template-rows: min(150px) 60%;
 	}
 `;
 
@@ -185,6 +185,7 @@ export const SpanField2 = styled.span`
 	grid-row: 2/2;
 	border-radius: 1rem;
 	color: #000000;
+	min-width: 100px;
 	@media (max-width: 500px) {
 		grid-row: 1/1;
 	}
@@ -196,7 +197,8 @@ export const SpanField3 = styled.span`
 	border-radius: 1rem;
 	grid-row: 2/2;
 	grid-column: 2/2;
-	width: 100%;
+	width: 50%;
+	min-width: 100px;
 	background-color: #c4c2c0ca;
 
 	color: #000000;

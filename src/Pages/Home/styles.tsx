@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Shirt from '../../images/Framecollection.png';
 import Product1 from '../../images/Roran_neko_girl_fullhd_realistic_white_t-shirt_0598cf25-9763-4c70-8cba-8286b6afe49b.png';
 import Product2 from '../../images/whiteshirtmodel.png';
+import Product5 from '../../images/malemodel.png';
 
 import Product4 from '../../images/model4.png';
 
@@ -177,7 +178,7 @@ export const MenuBox2 = styled.div`
 	height: 300px;
 	width: 100%;
 	font-size: 1rem;
-	background-image: url(${Product2});
+	background-image: url(${Product5});
 	background-size: contain;
 	background-repeat: no-repeat;
 `;

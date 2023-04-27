@@ -117,7 +117,7 @@ export const Info = styled.div`
 	flex-direction: column;
 	grid-column: 2/2;
 	justify-content: space-between;
-	background-color: #eff17987;
+	background-color: #a7d6d8;
 	@media (max-width: 500px) {
 		grid-row: 1/1;
 		grid-column: 2/2;
@@ -158,17 +158,18 @@ export const CardButton = styled.button`
 `;
 
 export const Number = styled.p`
-	font-size: 30px;
-	font-weight: 600;
-	line-height: 42px;
+	font-size: 1.6rem;
+	font-family: cursive;
+	line-height: 32px;
 	margin: 0 auto;
 	color: #000000;
 `;
 
 export const NumberBox = styled.div`
 	width: 100%;
-	height: 3rem;
-	padding: 10%;
+	height: 2rem;
+
+	border-radius: 30px;
 	margin: 0 auto;
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 		rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -176,5 +177,5 @@ export const NumberBox = styled.div`
 	display: flex;
 	flex-direction: row;
 
-	background-color: #5f5f3f86;
+	background-color: #ffffff;
 `;

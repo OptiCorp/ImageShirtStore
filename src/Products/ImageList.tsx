@@ -7,6 +7,8 @@ import { nekoSlice, JsonNekoImage, NekoCategory } from './imageSlice';
 import '../styles/index.css';
 import { IndexButton } from './styles';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
@@ -93,7 +95,6 @@ export const NekoImages = (props: NekoProps) => {
 // fetches the amount of images(categories), calls forth/distpatches actions/states from slice
 
 async function loadNekoCategory(type: string, dispatch: Dispatch) {
-	console.log('test');
 	dispatch(nekoSlice.actions.getNekoCategoryStart());
 
 	try {
@@ -107,6 +108,7 @@ async function loadNekoCategory(type: string, dispatch: Dispatch) {
 			min: parseInt(neko['min']),
 			max: parseInt(neko['max']),
 		};
+
 		dispatch(nekoSlice.actions.getNekoCategorySuccess(category));
 	} catch (e) {
 		dispatch(nekoSlice.actions.getNekoCategoryFailure(e));

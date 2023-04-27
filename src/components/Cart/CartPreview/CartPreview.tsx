@@ -15,7 +15,8 @@ import {
 
 import { Link, useNavigate, Route } from 'react-router-dom';
 import { CartItems } from '../CartItems';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 interface ModalType {
 	children?: ReactNode;
 	isOpen: boolean;
@@ -29,6 +30,7 @@ export const CartPreview: FunctionComponent<ModalType> = ({ toggle, isOpen }) =>
 	const leavePage = () => {
 		navigate('CartItems');
 	};
+
 	console.log(items);
 	return (
 		<div>
@@ -45,7 +47,9 @@ export const CartPreview: FunctionComponent<ModalType> = ({ toggle, isOpen }) =>
 									key={item.image.imageId}
 								/>
 								<CardButton
-									onClick={() => dispatch(removeItem(item.image.imageId))}
+									onClick={() => {
+										dispatch(removeItem(item.image.imageId));
+									}}
 								>
 									Remove
 								</CardButton>
